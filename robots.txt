@@ -1,0 +1,65 @@
+# 검색 노출 차단은 index.html의 <meta name="robots" content="noindex, nofollow, noarchive"> 가 담당합니다.
+#
+# 여기서 `Disallow: /` 로 전면 차단하지 않는 이유:
+#   1) 차단하면 크롤러가 페이지를 아예 못 읽어 noindex 지시를 "보지 못합니다".
+#      그러면 어딘가에 링크가 걸렸을 때 URL이 검색결과에 그대로 남을 수 있습니다.
+#      Google 공식 문서: "For the noindex rule to be effective, the page or resource
+#      must not be blocked by a robots.txt file."
+#   2) 카톡·슬랙 링크 미리보기 봇까지 막혀 공유 카드가 깨집니다.
+#
+# 따라서 일반 크롤링은 허용하고(→ noindex가 정상 작동), AI 학습 수집 봇만 차단합니다.
+#
+# ※ 이것은 접근 제어가 아닙니다. URL을 아는 사람은 누구나 볼 수 있습니다.
+# ※ 이 파일은 사이트 루트에서만 동작합니다.
+#    - 유저 사이트(choo8489.github.io 저장소) → 동작 O
+#    - 프로젝트 사이트(예: resume 저장소)          → 무시됨. meta 태그만 유효.
+
+User-agent: *
+Disallow:
+
+# ── AI 학습 데이터 수집 봇 차단 ──
+User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+# ── 링크 미리보기 봇은 명시적으로 허용 (공유 카드 유지) ──
+User-agent: kakaotalk-scrap
+Disallow:
+
+User-agent: Slackbot-LinkExpanding
+Disallow:
+
+User-agent: Slackbot
+Disallow:
+
+User-agent: facebookexternalhit
+Disallow:
+
+User-agent: Twitterbot
+Disallow:
+
+User-agent: LinkedInBot
+Disallow:
+
+User-agent: Discordbot
+Disallow:

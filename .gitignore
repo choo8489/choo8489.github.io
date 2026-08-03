@@ -1,0 +1,28 @@
+# 이 저장소에는 사이트 구동에 필요한 파일만 둡니다.
+# 원고·초안·내부 자료는 저장소 밖에서 관리합니다.
+
+# 문서 원본 / 초안
+*.pdf
+*.docx
+*.pptx
+*.psd
+*.ai
+*.sketch
+*.fig
+_draft/
+_src/
+
+# 작업 부산물
+*.tmp
+*.bak
+*.orig
+*~
+.cache/
+node_modules/
+
+# OS / 에디터
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
