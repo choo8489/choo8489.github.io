@@ -388,8 +388,8 @@ body.noscroll{overflow:hidden}
       <h3>버넥트 (Virnect) <span class="role">피지컬 AI팀 · 책임연구원</span></h3>
       <ul class="plist">
         <li><div class="pt">로봇 강화학습 Studio 플랫폼 <span class="yr">KETI · 2025.01–12</span></div><div class="pd">강화학습 기반 휴머노이드 로봇 조작 AI(컵 파지·목표 이동 정책), Studio Editor 및 실험 플랫폼 개발.</div><div style="margin-top:6px"><a class="link" href="https://robotics.virnect.com/products/humanoid-simulation" target="_blank" rel="noopener">제품 페이지 ↗</a></div></li>
-        <li><div class="pt">SLAM 기반 측위 시스템 <span class="yr">과기부 · 2025.01–12</span></div><div class="pd">단안 카메라 기반 SLAM 알고리즘, 실내 맵 생성 및 작업자 위치 추정(Localization) 기술 개발.</div></li>
-        <li><div class="pt">단안 카메라 기반 Occlusion Culling <span class="yr">과기부 · 2025.01–04</span></div><div class="pd">Depth-Anything-V2 기반 단안 Depth 추정 AI 활용, 실시간 Occlusion Culling 및 서버 연동 처리 구조 구현.</div></li>
+        <li><div class="pt">SLAM 기반 측위 시스템 <span class="yr">과기정통부 스마트제조혁신 · 2025.01–12</span></div><div class="pd">단안 카메라 기반 SLAM 알고리즘, 실내 맵 생성 및 작업자 위치 추정(Localization) 기술 개발. Industrial XR 프레임워크 과제의 SLAM 파트 담당.</div></li>
+        <li><div class="pt">단안 카메라 기반 Occlusion Culling <span class="yr">과기정통부 스마트제조혁신 · 2025.01–04</span></div><div class="pd">Depth-Anything-V2 기반 단안 Depth 추정 AI 활용, 실시간 Occlusion Culling 및 서버 연동 처리 구조 구현.</div></li>
         <li><div class="pt">건축유산 H-BIM 모니터링·원형복구 <span class="yr">문화재청(국가유산청) · 2024.03–2026.03</span></div><div class="pd">기후피해 대응 건축유산 3D 프로토타이핑, 실태조사 입력 UI, IoT 센서 인터페이스, 조립 시뮬레이션 및 AR 가시화 iPad 앱 개발.</div><div style="margin-top:6px"><a class="link" href="https://www.youtube.com/watch?v=5SSMtwgmR2c" target="_blank" rel="noopener">버넥트 공식 소개 영상 ▶</a></div></li>
         <li><div class="pt">게이지 인식 알고리즘 <span class="yr">KETI · 2024.06–08</span></div><div class="pd">비전 AI 기반 압력계·게이지 자동 인식, 초침 위치 분석 위험도 판단 알고리즘 개발.</div></li>
         <li><div class="pt">XR 기반 우주 체험 <span class="yr">세종청사 · 2024.01–10</span></div><div class="pd">XR 장비 기반 공간 인식·사용자 신체 정보 추정, 실감형 우주 체험 XR 애플리케이션 개발.</div></li>
@@ -631,13 +631,14 @@ const PROJECTS = [
    {h:'성과', items:['“하나의 파이프라인에 모든 학습 로직 통합이 어려움” → 학습 단위를 Action 단위로 분리하고 FSM 기반 추론 구조로 해결','기획 리소스 부족 상황에서 커뮤니케이션을 주도해 요구사항을 스스로 정의하며 프로젝트 리딩','로봇이 컵을 안정적으로 잡고 박스로 옮기는 강화학습 모델 구현 성공']},
   ], links:[{l:'데모 영상 (YouTube)',u:'https://www.youtube.com/watch?v=Lgl9JTBiamU'}]},
 
- {org:'과학기술정보통신부 · 2025', title:'SLAM 기반 실내 측위 시스템', period:'2025.01 – 2025.12', team:'개발자 1 (단독)',
+ {org:'과기정통부 스마트제조혁신기술개발 · 2025', title:'SLAM 기반 실내 측위 시스템', period:'2025.01 – 2025.12', team:'SLAM 파트 단독 담당',
   skills:['C++','Unity','SLAM SDK','Depth-Anything-V2'], head:{t:'svg',k:'sdk',cap:'개념 도식'},
   summary:'SLAM으로 생성한 맵 기반 실시간 측위·증강을 수행하고, 사용자 위치를 관제센터에서 모니터링할 수 있는 SLAM SDK 및 Occlusion Culling 기능 개발.',
   sections:[
    {h:'담당 기능', items:[{t:'SLAM 안정성 및 성능 개선', s:['Windows·Mobile SLAM Crash 이슈(메모리 등) 해결','SLAM 엔진 C++11 → C++17 마이그레이션, 성능 향상·메모리 최적화','주요 연산 경로 예외 처리로 SDK 안정성 개선','Third-party 모듈 충돌 해결 위한 빌드 스크립트 자동화·의존성 관리']},{t:'Occlusion Culling 개발 — Depth-Anything-V2 기반 Depth 추정 모델 적용'},{t:'SDK·에디터 연동', s:['Unity에서 바로 쓰는 SLAM SDK + 샘플 코드(맵 생성·측위)','스마트글라스·일반 카메라·이미지 입력 등 범용 입력 파이프라인']}]},
    {h:'문제 해결 방식', items:[{t:'현장 측위 불안정 문제', s:['측위 파라미터를 단계별 세트로 분리해 상황별 자동/수동 조정','다양한 조명/환경에서 안정적 측위 확보']},{t:'SLAM 디버깅 난이도 개선', s:['내부 상태 파악이 어려운 문제 → Viewer(상태 시각화 + 로그 조회 툴) 개발','현장 대응 시간 단축·유지보수 효율 향상']}]},
-  ], links:[]},
+  ], links:[],
+  note:'국가R&D 「(세부6-1) 제조 현장 맞춤형 Industrial XR 프레임워크 개발」(과기정통부 · 스마트제조혁신기술개발, 전문기관 IITP, 주관 한국전자기술연구원) 참여기관 과제로, 본인은 SLAM 파트를 담당했습니다. 과제 개요는 NTIS에서 과제명으로 조회할 수 있습니다.'},
 
  {org:'문화재청(국가유산청) · 2024–2026', title:'건축유산 H-BIM 모니터링 · 원형복구', period:'2024.03 – 2026.03', team:'주개발',
   skills:['C#','Unity 6','MVVM','UniRx','DOTween','iPad'], head:{t:'yt',id:'5SSMtwgmR2c'},
