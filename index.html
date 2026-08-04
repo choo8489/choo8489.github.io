@@ -250,7 +250,7 @@ body.noscroll{overflow:hidden}
     <div class="facts">
       <span class="fact"><b>경력</b> 총 10년</span>
       <span class="fact"><b>현직</b> 버넥트 피지컬 AI팀 · 책임연구원</span>
-      <span class="fact"><b>2026</b> 29개 저장소 · 1,511 커밋</span>
+      <span class="fact"><b>2026</b> 로봇 자율주행 · 시뮬레이션 · AI 에이전트 인프라</span>
       <span class="fact"><b>강점</b> 로봇 · SLAM · AX 자동화 문제해결</span>
     </div>
     <div class="skills">
@@ -602,12 +602,12 @@ const PROJECTS = [
   summary:'로봇의 시뮬레이션 → SLAM/로컬라이제이션 → 강화학습을 하나의 ROS2 스택으로 통합한 사내 로봇 R&D 핵심 플랫폼. 이후의 플릿 운영 콘솔과 스택 프로비저닝 도구가 모두 이 규약을 기준으로 동작합니다.',
   sections:[
    {h:'담당 기능', items:[{t:'시뮬레이션 환경', s:['Isaac Sim USD 기반 오피스/창고/facility 환경 구축','Newton 물리엔진 통합, 휴머노이드·4족보행 solver 및 contact 처리']},{t:'로컬라이제이션', s:['map_relocalizer + loop-closure pose graph 모듈 개발','SLAM degeneracy 구간 대응']},{t:'3DGS 파이프라인 — 3D Gaussian Splatting PLY를 PCD로 변환'},{t:'Visual-RL', s:['Newton 네이티브 3DGS 시뮬 위에서 vectorized physics 기반 학습','goal-distance 커리큘럼, heading reward shaping']},'로봇 프로파일 기반 센서(LiDAR FOV/range) 파라미터화','아키텍처 리뷰 문서화 — 구조적 부채 감사·우선순위 정리']},
-   {h:'성과', items:['2026년 상반기 로봇 R&D의 중심 저장소(199 커밋)로, 시뮬–SLAM–RL을 단일 파이프라인으로 연결']},
+   {h:'성과', items:['시뮬레이션 → 로컬라이제이션 → 강화학습을 단일 ROS2 파이프라인으로 연결해, 흩어져 있던 실험을 재현 가능한 루프로 정리','이후 플릿 운영 콘솔·스택 프로비저닝 도구가 이 규약을 기준으로 동작하도록 사내 표준 역할 수행']},
   ], links:[]},
 
  {org:'버넥트 · 2026', title:'로봇 시뮬레이터 & 강화학습 노드 저작 도구', period:'2026.01 – 2026.06', team:'주개발',
   skills:['C#','Unity 6','ML-Agents','ONNX Runtime','URDF','UI Toolkit'], head:{t:'svg',k:'sim',cap:'개념 도식'},
-  summary:'자동화 공정용 휴머노이드 버추얼 커미셔닝 시뮬레이터(사내 제품)와, 코드로 작성하던 강화학습 환경을 노드 그래프로 저작할 수 있게 만든 ML-Agents 확장 모듈. 두 저장소 합계 441 커밋.',
+  summary:'자동화 공정용 휴머노이드 버추얼 커미셔닝 시뮬레이터(사내 제품)와, 코드로 작성하던 강화학습 환경을 노드 그래프로 저작할 수 있게 만든 ML-Agents 확장 모듈. 두 축을 함께 설계·구현했습니다.',
   sections:[
    {h:'담당 기능 · 시뮬레이터', items:['에디터 프레임워크 — 노드 에디터 연동, 도킹 시스템·드래그 상태 머신, SceneView/Hierarchy/Inspector UX','God-class(EditView)를 partial 분할하는 대규모 리팩터링','강화학습 스튜디오 통합 — Episode TimeScale, RL 프레임워크 연동, NodeGraph 기반 self-contained 추론','단축키·입력 시스템(F2 리네임, WASD·UI 입력 충돌 해결)','룰 기반 로봇 파이프라인(Pick-and-Place / AMR) 설계 문서화, URDF 진단 도구']},
    {h:'담당 기능 · RL 노드 모듈', items:['멀티 트레이닝 에어리어 구조, Variable 시스템, 노드 복사/붙여넣기, Undo/Redo, 배열 포트 메타데이터 모델','Handler 패턴 분리, 멀티 인스턴스 학습(InstanceCount)','ONNX Runtime 기반 self-contained 추론','샘플 — 물체 찾기 리워드 체인, 4족보행 샘플, 룰 기반 컵 파지 파이프라인']},
@@ -616,9 +616,9 @@ const PROJECTS = [
 
  {org:'버넥트 · 2026', title:'메시 경량화 풀스택 — Rust 코어부터 엔진 통합까지', period:'2026.02 – 2026.06', team:'주개발',
   skills:['Rust','C#','QEM','egui','FreeCAD','C#/Rust FFI'], head:{t:'svg',k:'mesh',cap:'개념 도식'},
-  summary:'대용량 3D 메시 경량화를 알고리즘 코어(Rust)부터 도구·엔진 통합까지 한 축으로 직접 구현. 3개 저장소 합계 216 커밋.',
+  summary:'대용량 3D 메시 경량화를 알고리즘 코어(Rust)부터 도구·엔진 통합까지 한 축으로 직접 구현했습니다.',
   sections:[
-   {h:'담당 기능', items:[{t:'경량화 엔진 (Rust · 34커밋)', s:['QEM(Quadric Error Metrics) 기반 메시 단순화 엔진 직접 구현','정밀도 향상, Boundary 보존, Edge collapse 최적화, 면 뒤집힘 해결']},{t:'변환·경량화 툴 (87커밋)', s:['IO 레이어를 독립 crate로 분리, STL·STEP·GLB 등 다포맷 지원','FreeCAD 연동, egui/eframe GUI + 3D 뷰어 + CLI']},{t:'Unity 브릿지 (95커밋)', s:['NativeDecimator API로 Rust 코어를 Unity에 연결','URDF 임포터, 공통 UI(도킹·TreeView·Dialog)','mesh GraphicsBuffer 네이티브 메모리 누수 차단']}]},
+   {h:'담당 기능', items:[{t:'① 경량화 엔진 — Rust', s:['QEM(Quadric Error Metrics) 기반 메시 단순화 엔진 직접 구현','정밀도 향상, Boundary 보존, Edge collapse 최적화, 면 뒤집힘 해결']},{t:'② 변환·경량화 툴', s:['IO 레이어를 독립 crate로 분리, STL·STEP·GLB 등 다포맷 지원','FreeCAD 연동, egui/eframe GUI + 3D 뷰어 + CLI']},{t:'③ Unity 브릿지', s:['NativeDecimator API로 Rust 코어를 Unity에 연결','URDF 임포터, 공통 UI(도킹·TreeView·Dialog)','mesh GraphicsBuffer 네이티브 메모리 누수 차단']}]},
    {h:'성과', items:['경량화 알고리즘 → 독립 도구 → 엔진 패키지까지 하나의 축으로 제품화','Unity 팀의 메시 변환 반복 작업을 도구화해 자동화']},
   ], links:[]},
 
