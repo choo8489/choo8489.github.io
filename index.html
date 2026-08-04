@@ -390,7 +390,7 @@ body.noscroll{overflow:hidden}
         <li><div class="pt">로봇 강화학습 Studio 플랫폼 <span class="yr">KETI · 2025.01–12</span></div><div class="pd">강화학습 기반 휴머노이드 로봇 조작 AI(컵 파지·목표 이동 정책), Studio Editor 및 실험 플랫폼 개발.</div><div style="margin-top:6px"><a class="link" href="https://robotics.virnect.com/products/humanoid-simulation" target="_blank" rel="noopener">제품 페이지 ↗</a></div></li>
         <li><div class="pt">SLAM 기반 측위 시스템 <span class="yr">과기정통부 스마트제조혁신 · 2025.01–12</span></div><div class="pd">단안 카메라 기반 SLAM 알고리즘, 실내 맵 생성 및 작업자 위치 추정(Localization) 기술 개발. Industrial XR 프레임워크 과제의 SLAM 파트 담당.</div></li>
         <li><div class="pt">단안 카메라 기반 Occlusion Culling <span class="yr">과기정통부 스마트제조혁신 · 2025.01–04</span></div><div class="pd">Depth-Anything-V2 기반 단안 Depth 추정 AI 활용, 실시간 Occlusion Culling 및 서버 연동 처리 구조 구현.</div></li>
-        <li><div class="pt">건축유산 H-BIM 모니터링·원형복구 <span class="yr">문화재청(국가유산청) · 2024.03–2026.03</span></div><div class="pd">기후피해 대응 건축유산 3D 프로토타이핑, 실태조사 입력 UI, IoT 센서 인터페이스, 조립 시뮬레이션 및 AR 가시화 iPad 앱 개발.</div><div style="margin-top:6px"><a class="link" href="https://www.youtube.com/watch?v=5SSMtwgmR2c" target="_blank" rel="noopener">버넥트 공식 소개 영상 ▶</a></div></li>
+        <li><div class="pt">건축유산 H-BIM 모니터링·원형복구 <span class="yr">국가유산청 · 주관 ETRI · 2024.03–2026.03</span></div><div class="pd">기후피해 대응 건축유산 3D 프로토타이핑, 실태조사 입력 UI, IoT 센서 인터페이스, 조립 시뮬레이션 및 AR 가시화 iPad 앱 개발.</div><div style="margin-top:6px"><a class="link" href="https://www.youtube.com/watch?v=5SSMtwgmR2c" target="_blank" rel="noopener">버넥트 공식 소개 영상 ▶</a></div></li>
         <li><div class="pt">게이지 인식 알고리즘 <span class="yr">KETI 국제공동연구 · 2024.06–08</span></div><div class="pd">비전 AI 기반 압력계·게이지 자동 인식, 초침 위치 분석 위험도 판단 알고리즘 개발.</div></li>
         <li><div class="pt">XR 기반 우주 체험 <span class="yr">세종청사 · 2024.01–10</span></div><div class="pd">XR 장비 기반 공간 인식·사용자 신체 정보 추정, 실감형 우주 체험 XR 애플리케이션 개발.</div></li>
         <li><div class="pt">멀티 바코드·QR 인식 <span class="yr">POC · 2024.06–08</span></div><div class="pd">YOLO 기반 QR·바코드 멀티 객체 인식 알고리즘 개발.</div></li>
@@ -640,13 +640,14 @@ const PROJECTS = [
   ], links:[],
   note:'국가R&D 「(세부6-1) 제조 현장 맞춤형 Industrial XR 프레임워크 개발」(과기정통부 · 스마트제조혁신기술개발, 전문기관 IITP, 주관 한국전자기술연구원) 참여기관 과제로, 본인은 SLAM 파트를 담당했습니다. 과제 개요는 NTIS에서 과제명으로 조회할 수 있습니다.'},
 
- {org:'문화재청(국가유산청) · 2024–2026', title:'건축유산 H-BIM 모니터링 · 원형복구', period:'2024.03 – 2026.03', team:'주개발',
+ {org:'국가유산청 / 주관 ETRI · 2024–2026', title:'건축유산 H-BIM 모니터링 · 원형복구', period:'2024.03 – 2026.03', team:'주개발',
   skills:['C#','Unity 6','MVVM','UniRx','DOTween','iPad'], head:{t:'yt',id:'5SSMtwgmR2c'},
   summary:'기후피해에 대응한 건축유산 H-BIM 모니터링 iPad 앱. 건축유산 3D 프로토타이핑, 실태조사 결과 입력 UI, IoT 모니터링 센서 인터페이스, AR 가시화와 부재 조립 시뮬레이션을 개발했습니다.',
   sections:[
    {h:'담당 기능', items:[{t:'MVVM 아키텍처 리팩터링', s:['Action/Binder/ViewBase 구조 분리, Installer 모듈화','ReactiveCommand → ReactiveProperty 바인딩 패턴 통일','글로벌 네임스페이스 정리']},{t:'조립 시뮬레이션 기능', s:['MeshCollider 전환 및 부재 충돌 방지','자석 스냅, Ghost Preview 배치 시각화','오브젝트 배치/삭제/복제 undo·redo 연동']},'검색 결과 텍스트 하이라이트, 카메라 리셋 DOTween 애니메이션']},
    {h:'성과', items:['조립(Assembling) 씬은 2025년 세계경주전시회 등 전시에 활용','리팩터링 이후 부재 팝업·탭 전환·기즈모 관련 결함 다수 해소']},
-  ], links:[{l:'버넥트 공식 소개 영상 (YouTube)',u:'https://www.youtube.com/watch?v=5SSMtwgmR2c'}]},
+  ], links:[{l:'버넥트 공식 소개 영상 (YouTube)',u:'https://www.youtube.com/watch?v=5SSMtwgmR2c'}],
+  note:'국가R&D 「기후피해 원형복구 지원용 스캔데이터 기반 지능형 건축유산정보모델링 기술개발 및 실증」(국가유산청 · 기후변화대응국가유산보존관리기술개발, 전문기관 국립문화유산연구원, 주관 한국전자통신연구원) 참여기관 과제입니다. 과제 개요는 NTIS에서 과제명으로 조회할 수 있습니다.'},
 
  {org:'KETI 국제공동연구 · 2024', title:'게이지 인식 알고리즘', period:'2024.06 – 2024.08', team:'개발자 1 (단독)',
   skills:['Python','YOLOv8','OpenCV','딥러닝'], head:{t:'svg',k:'gauge',cap:'개념 도식'},
