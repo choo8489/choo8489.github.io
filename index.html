@@ -40,12 +40,12 @@
 }}
 :root[data-theme="light"]{
   --bg:#F5F6F8; --surface:#FFFFFF; --surface-2:#EEF1F5; --line:#DCE0E7;
-  --ink:#14171D; --ink-2:#454C57; --muted:#79818D; --accent:#A9670A; --accent-ink:#7d4c06; --good:#1C7A4C;
+  --ink:#14171D; --ink-2:#454C57; --muted:#79818D; --accent:#A9670A; --accent-ink:#7d4c06; --accent-soft:#F3E0C0; --good:#1C7A4C;
   --shadow:0 1px 2px rgba(20,23,29,.05), 0 8px 30px rgba(20,23,29,.06);
 }
 :root[data-theme="dark"]{
   --bg:#0E1116; --surface:#151A21; --surface-2:#1B212B; --line:#2A313D;
-  --ink:#E7EBF1; --ink-2:#AEB7C3; --muted:#79828F; --accent:#FFB020; --accent-ink:#FFC658; --good:#4ADE9A;
+  --ink:#E7EBF1; --ink-2:#AEB7C3; --muted:#79828F; --accent:#FFB020; --accent-ink:#FFC658; --accent-soft:#2a2113; --good:#4ADE9A;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 34px rgba(0,0,0,.35);
 }
 *{box-sizing:border-box}
@@ -62,12 +62,24 @@ a{color:var(--accent-ink)}
 .topbar .row{display:flex;align-items:center;justify-content:space-between;height:56px;gap:14px}
 .brand{font-weight:700;letter-spacing:-.01em}
 .brand span{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--muted);margin-left:8px}
-.topnav{display:flex;align-items:center;gap:2px}
-.topnav a{font-family:var(--mono);font-size:.75rem;color:var(--ink-2);text-decoration:none;padding:8px 10px;border-radius:7px}
+.brand{flex:0 0 auto}
+.topnav{display:flex;align-items:center;gap:6px;min-width:0;flex:1 1 auto;justify-content:flex-end}
+/* 모바일에서도 내비게이션을 숨기지 않고 가로 스크롤로 유지 */
+.topnav .navlinks{display:flex;align-items:center;gap:2px;min-width:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%)}
+.topnav .navlinks::-webkit-scrollbar{display:none}
+.topnav a{font-family:var(--mono);font-size:.75rem;color:var(--ink-2);text-decoration:none;padding:8px 10px;border-radius:7px;white-space:nowrap}
 .topnav a:hover{color:var(--ink);background:var(--surface-2)}
-.tgl{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:15px;display:grid;place-items:center}
+.tgl{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:15px;display:grid;place-items:center}
 .tgl:hover{color:var(--accent);border-color:var(--accent)}
-@media (max-width:680px){.topnav a{display:none}}
+@media (max-width:680px){
+  .brand span{display:none}
+  .topbar .row{gap:10px}
+  .topnav a{font-size:.7rem;padding:7px 8px}
+  .topnav .navlinks{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 14px),transparent 100%);
+    mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 14px),transparent 100%)}
+}
 
 /* hero */
 .hero{padding:64px 0 36px;border-bottom:1px solid var(--line);position:relative;isolation:isolate}
@@ -97,18 +109,31 @@ section{padding:56px 0}
 .sec-head h2{font-size:1.4rem;letter-spacing:-.02em;font-weight:750}
 .sec-head .idx{font-family:var(--mono);color:var(--accent);font-size:.78rem;font-weight:600}
 .sec-head .note{margin-left:auto;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+/* 좁은 화면에서는 보조 문구를 제목 아래 줄로 내려 제목이 쪼개지지 않게 한다 */
+@media (max-width:560px){.sec-head{flex-wrap:wrap}.sec-head .note{margin-left:0;flex-basis:100%}}
 
 /* highlight projects with video */
 .projs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media (max-width:720px){.projs{grid-template-columns:1fr}}
+.projlead{color:var(--ink-2);font-size:.94rem;margin:-8px 0 14px;max-width:74ch}
+.projfilters{display:inline-flex;gap:4px;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:4px;margin:0 0 18px}
+.projfilter{border:0;background:transparent;color:var(--ink-2);font-family:var(--mono);font-size:.72rem;border-radius:6px;padding:7px 10px;cursor:pointer;white-space:nowrap}
+.projfilter[aria-pressed="true"]{background:var(--surface);color:var(--accent-ink);box-shadow:var(--shadow);font-weight:700}
+.projfilter:hover{color:var(--ink)}
+.projempty{grid-column:1/-1;background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:18px 20px;color:var(--ink-2);font-size:.92rem}
+.projempty b{color:var(--ink)}
 .proj{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .18s ease,border-color .18s ease}
 .proj:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
 .thumb{position:relative;display:block;aspect-ratio:16/9;background:linear-gradient(135deg,var(--surface-2),color-mix(in srgb,var(--accent) 22%,var(--surface-2)));overflow:hidden}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .thumb svg,.modal .mhead svg{width:100%;height:100%;display:block;color:var(--ink-2)}
-.thumb .cap,.modal .mhead .cap{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--muted)}
-.thumb .play{position:absolute;inset:0;display:grid;place-items:center}
-.thumb .play span{width:52px;height:52px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;font-size:20px;backdrop-filter:blur(2px)}
+/* 사진 위에서도 읽히도록 캡션에 얇은 스크림을 깐다 */
+.thumb .cap,.modal .mhead .cap{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;
+  color:rgba(255,255,255,.82);background:rgba(0,0,0,.46);padding:2px 7px;border-radius:5px;backdrop-filter:blur(2px)}
+/* 재생 버튼은 원형 영역만 링크로 — 나머지 썸네일은 상세 모달을 연다 */
+.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;text-decoration:none;z-index:3}
+.play span{width:52px;height:52px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;font-size:20px;backdrop-filter:blur(2px);transition:background .15s ease,transform .15s ease}
+a.play:hover span,a.play:focus-visible span{background:rgba(0,0,0,.82);transform:scale(1.07)}
 .thumb .tagline{position:absolute;left:0;bottom:0;right:0;padding:10px 12px;font-family:var(--mono);font-size:.68rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.6))}
 .proj .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:9px;flex:1}
 .proj .org{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
@@ -116,6 +141,7 @@ section{padding:56px 0}
 .proj p{margin:0;color:var(--ink-2);font-size:.92rem}
 .proj .row{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
 .t{font-family:var(--mono);font-size:.68rem;padding:3px 8px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
+.scope{font-family:var(--mono);font-size:.66rem;color:var(--accent-ink);background:var(--accent-soft);border-radius:6px;padding:3px 7px}
 
 /* engineering proof */
 .proofgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -171,9 +197,13 @@ footer .row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;a
 .mback{position:fixed;inset:0;background:rgba(6,8,12,.66);backdrop-filter:blur(5px);display:none;z-index:100;overflow-y:auto;padding:20px}
 .mback.open{display:block}
 .modal{max-width:760px;margin:36px auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.45);overflow:hidden}
-.modal .mhead{position:relative;aspect-ratio:16/8;background:linear-gradient(135deg,var(--surface-2),color-mix(in srgb,var(--accent) 26%,var(--surface-2)))}
-.modal .mhead img{width:100%;height:100%;object-fit:cover;display:block}
-.modal .mhead .htitle{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;background:linear-gradient(transparent,rgba(0,0,0,.62));color:#fff}
+.modal .mhead{position:relative;aspect-ratio:16/8;overflow:hidden;background:linear-gradient(135deg,var(--surface-2),color-mix(in srgb,var(--accent) 26%,var(--surface-2)))}
+/* 썸네일에 홍보 문구가 박혀 있는 경우 제목과 겹치므로, 프로젝트별로 헤더 크롭을 조정한다(head.mfit) */
+.modal .mhead img{width:100%;height:100%;object-fit:cover;display:block;
+  transform:scale(var(--z,1));transform-origin:var(--zx,50%) var(--zy,50%)}
+/* 썸네일에 자체 텍스트가 있는 경우가 있어, 제목이 묻히지 않도록 충분히 어둡게 덮는다 */
+.modal .mhead .htitle{position:absolute;left:0;right:0;bottom:0;padding:34px 22px 18px;
+  background:linear-gradient(transparent,rgba(0,0,0,.74) 38%,rgba(0,0,0,.96));color:#fff}
 .modal .mhead .htitle .o{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
 .modal .mhead .htitle h2{font-size:clamp(1.2rem,3.4vw,1.7rem);letter-spacing:-.02em;margin-top:4px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.4)}
 .mclose{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:10px;border:none;background:rgba(0,0,0,.5);color:#fff;font-size:19px;cursor:pointer;line-height:1}
@@ -211,14 +241,115 @@ body.noscroll{overflow:hidden}
 .repochips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
 .repochip{font-family:var(--mono);font-size:.66rem;padding:3px 7px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted)}
 
+/* ---- 개인 R&D / Private Labs ---- */
+.labintro{color:var(--ink-2);font-size:.95rem;margin:0 0 20px;max-width:76ch}
+.labintro b{color:var(--ink);font-weight:650}
+.labs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:900px){.labs{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.labs{grid-template-columns:1fr}}
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.labmedia{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,var(--surface-2),color-mix(in srgb,var(--accent) 24%,var(--surface-2)));overflow:hidden}
+.labmedia img{width:100%;height:100%;object-fit:cover;display:block}
+.labmedia.contain img{object-fit:contain;background:#fff}
+.labmedia svg{width:100%;height:100%;display:block;color:var(--ink-2)}
+.labbody{padding:15px 16px 17px;display:flex;flex-direction:column;gap:10px;flex:1}
+.labmeta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.labtag{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.labstate{font-family:var(--mono);font-size:.62rem;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.lab h3{font-size:1rem;font-weight:740;letter-spacing:-.01em;line-height:1.36}
+.lab p{margin:0;color:var(--ink-2);font-size:.88rem}
+.lab dl{display:grid;grid-template-columns:38px 1fr;gap:4px 8px;margin:0}
+.lab dt{font-family:var(--mono);font-size:.64rem;color:var(--accent);font-weight:700}
+.lab dd{margin:0;color:var(--ink-2);font-size:.82rem}
+.lablinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:2px}
+.lablinks a,.lablinks span{font-family:var(--mono);font-size:.68rem;text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:5px 8px;color:var(--ink-2);background:var(--surface-2)}
+.lablinks a:hover{border-color:var(--accent);color:var(--accent-ink)}
+
+/* ---- 기술 연혁 (이미지 중심 타임라인) ---- */
+.techlead{color:var(--ink-2);font-size:.95rem;margin:0 0 6px;max-width:74ch}
+.techlead b{color:var(--ink);font-weight:650}
+/* 데스크톱(내용폭 952px)에서는 7칸이 모두 들어가므로 스크롤 안내를 감춘다 */
+.techhint{display:none;font-family:var(--mono);font-size:.68rem;color:var(--muted);margin:0 0 20px}
+@media (min-width:721px) and (max-width:1000px){.techhint{display:block}}
+.techwrap{overflow-x:auto;overflow-y:hidden;padding-bottom:10px;scrollbar-width:thin}
+.techwrap::-webkit-scrollbar{height:6px}
+.techwrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.techline{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(134px,1fr);min-width:938px}
+.techline::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--ink);opacity:.9;transform:translateY(-1px)}
+.era{position:relative;display:grid;grid-template-rows:1fr 1fr;justify-items:center;min-height:430px;padding:0 8px}
+.era .slot{position:relative;display:flex;flex-direction:column;align-items:center;width:100%}
+.era .slot.top{align-self:end;justify-content:flex-end;padding-bottom:34px}
+.era .slot.bot{align-self:start;justify-content:flex-start;padding-top:34px}
+.era .slot.top::after,.era .slot.bot::before{content:"";position:absolute;left:50%;width:1px;height:34px;background:var(--line)}
+.era .slot.top::after{bottom:0}
+.era .slot.bot::before{top:0}
+.era .dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;
+  background:var(--c);color:#fff;display:grid;place-items:center;z-index:2;box-shadow:0 0 0 6px var(--bg)}
+.era .dot svg{width:21px;height:21px;display:block}
+/* translateZ(0): transform이 걸린 자식(img)이 border-radius 클리핑을 벗어나는 문제를 막는다 */
+.medal{width:108px;height:108px;border-radius:50%;overflow:hidden;background:var(--surface-2);border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--ink-2);transform:translateZ(0);isolation:isolate}
+.medal svg{width:100%;height:100%;display:block}
+/* 공식 공개 영상 장면 — 도식과 톤을 맞추기 위해 흑백 처리.
+   썸네일은 16:9라 원형(1:1)으로 자르면 초점이 어긋나므로 --ox(가로 위치)와
+   --z/--zx/--zy(확대 중심)로 프레임마다 피사체를 맞춘다. */
+.medal img{width:100%;height:100%;object-fit:cover;display:block;
+  object-position:var(--ox,50%) 50%;
+  transform:scale(var(--z,1));transform-origin:var(--zx,50%) var(--zy,50%);
+  filter:grayscale(1) contrast(var(--ct,1.06)) brightness(var(--br,1))}
+.techsrc{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin:18px 0 0;line-height:1.7}
+/* 캡션은 위/아래로 번갈아 배치되므로 같은 줄의 이웃과 2칸 떨어져 있다 → 칸보다 넓어도 안전 */
+.eracap{text-align:center;max-width:176px}
+.eracap .yr{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1.2}
+.eracap h3{font-size:.92rem;font-weight:720;letter-spacing:-.01em;margin-top:3px;word-break:keep-all;text-wrap:balance}
+.eracap .chips{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:9px}
+.eracap .chips span{font-family:var(--mono);font-size:.6rem;padding:2px 6px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+@media (max-width:720px){
+  .techwrap{overflow:visible}
+  .techline{grid-auto-flow:row;grid-auto-columns:auto;min-width:0}
+  .techline::before{left:21px;right:auto;top:10px;bottom:10px;width:2px;height:auto;transform:none}
+  .era{display:flex;align-items:center;gap:16px;min-height:0;padding:12px 0 12px 58px;grid-template-rows:none}
+  /* flex 항목의 기본 min-width:auto 때문에 칩 줄이 안 접히고 페이지가 가로로 넘친다 */
+  .era .slot{width:auto;padding:0!important;min-width:0;align-items:flex-start}
+  .era .slot::after,.era .slot::before{display:none!important}
+  .era .slot.m{order:1;flex:0 0 auto}
+  .era .slot.c{order:2;flex:1 1 auto;min-width:0}
+  .eracap{min-width:0}
+  .era .dot{left:21px;top:50%;width:34px;height:34px;box-shadow:0 0 0 5px var(--bg)}
+  .era .dot svg{width:17px;height:17px}
+  .medal{width:66px;height:66px}
+  .eracap{text-align:left;max-width:none}
+  .eracap .chips{justify-content:flex-start}
+}
+
+/* JS 비활성 환경 대비 — 대표 프로젝트 텍스트 폴백 */
+.nojs{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.nojs p{margin:0 0 12px;color:var(--muted);font-family:var(--mono);font-size:.72rem}
+.nojs ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px}
+.nojs li{color:var(--ink-2);font-size:.9rem}
+.nojs li b{color:var(--ink);font-weight:640}
+.nojs li span{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-left:6px}
+
 @media print{
   :root{--bg:#fff;--surface:#fff;--surface-2:#f4f4f4;--line:#ccc;--ink:#000;--ink-2:#333;--muted:#666;--accent:#7d4c06;--accent-ink:#7d4c06;--shadow:none}
-  .topbar,.tgl,.mback,.thumb,.badge{display:none!important}
+  .topbar,.tgl,.mback,.thumb,.badge,.techhint{display:none!important}
   section{padding:18px 0;break-inside:avoid}
-  .proj,.proof,.axcard,.job{break-inside:avoid}
-  .projs,.proofgrid,.axgrid{grid-template-columns:1fr 1fr}
+  .proj,.proof,.axcard,.lab,.job,.era{break-inside:avoid}
+  .projs,.proofgrid,.axgrid,.labs{grid-template-columns:1fr 1fr}
   .reveal{opacity:1!important;transform:none!important}
+  .techwrap{overflow:visible}
+  .techline{grid-auto-flow:row;grid-auto-columns:auto;min-width:0}
+  .techline::before{left:21px;right:auto;top:10px;bottom:10px;width:2px;height:auto;transform:none}
+  .era{display:flex;align-items:center;gap:16px;min-height:0;padding:10px 0 10px 58px;grid-template-rows:none}
+  .era .slot{width:auto;padding:0!important;min-width:0;align-items:flex-start}
+  .era .slot::after,.era .slot::before{display:none!important}
+  .era .slot.m{order:1;flex:0 0 auto}.era .slot.c{order:2;flex:1 1 auto;min-width:0}
+  .era .dot{left:21px;top:50%;width:32px;height:32px;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .medal{width:62px;height:62px}
+  .eracap{text-align:left;max-width:none}
+  .eracap .chips{justify-content:flex-start}
   a[href^="http"]::after{content:" (" attr(href) ")";font-size:.62rem;color:#666;word-break:break-all}
+  .era a[href^="http"]::after{content:""}
 }
 </style>
 </head>
@@ -228,12 +359,16 @@ body.noscroll{overflow:hidden}
   <div class="wrap row">
     <div class="brand">이동주 <span>Unity · XR · AI · Robotics</span></div>
     <nav class="topnav">
-      <a href="#projects">대표 프로젝트</a>
-      <a href="#proof">해결사례</a>
-      <a href="#dev2026">AX/R&D</a>
-      <a href="#career">경력</a>
-      <a href="#edu">기타</a>
-      <a href="#links">링크</a>
+      <span class="navlinks">
+        <a href="#tech">기술연혁</a>
+        <a href="#projects">대표 프로젝트</a>
+        <a href="#proof">해결사례</a>
+        <a href="#dev2026">AX/R&D</a>
+        <a href="#labs">개인R&D</a>
+        <a href="#career">경력</a>
+        <a href="#edu">기타</a>
+        <a href="#links">링크</a>
+      </span>
       <button class="tgl" id="themeBtn" aria-label="테마 전환" title="라이트/다크">◐</button>
     </nav>
   </div>
@@ -264,20 +399,164 @@ body.noscroll{overflow:hidden}
 
 <main class="wrap">
 
+<section id="tech">
+  <div class="sec-head"><span class="idx">01</span><h2>기술 연혁</h2><span class="note">웹 · 클라우드 → XR · 그래픽스 → AI · 로봇</span></div>
+  <p class="techlead">10년 동안 다룬 기술의 축이 어떻게 이동했는지를 한 장으로 정리했습니다.
+    <b>웹·클라우드</b>에서 시작해 <b>Unity·XR·실시간 그래픽스</b>를 거쳐, 지금은 <b>컴퓨터비전·SLAM·강화학습·로봇 자율주행</b>을 다룹니다.</p>
+  <p class="techhint">← 좌우로 스크롤 →</p>
+
+  <div class="techwrap">
+    <div class="techline">
+
+      <!-- 2016–2017 -->
+      <div class="era">
+        <div class="slot top c"><div class="eracap">
+          <div class="yr">2016 – 2017</div><h3>웹 · 클라우드</h3>
+          <div class="chips"><span>JavaScript</span><span>AWS</span><span>Docker</span></div>
+        </div></div>
+        <span class="dot" style="--c:#E0A21A" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span>
+        <div class="slot bot m"><div class="medal"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M45 43c-6 0-11-5-11-11s5-11 11-11c2 0 3 .3 5 1.2C52 16 58 12 65 12c10 0 18 8 18 18v.8c5 1 9 5.4 9 11 0 6-5 11.2-11 11.2H45z" opacity=".55"/>
+          <rect x="24" y="54" width="72" height="44" rx="5"/>
+          <path d="M24 66h72"/>
+          <g fill="currentColor" stroke="none"><circle cx="32" cy="60" r="2"/><circle cx="40" cy="60" r="2"/><circle cx="48" cy="60" r="2"/></g>
+          <path d="M48 90l-8-8 8-8M72 90l8-8-8-8M65 72l-10 20" opacity=".8"/>
+        </svg></div></div>
+      </div>
+
+      <!-- 2018–2020 -->
+      <div class="era">
+        <div class="slot top m"><div class="medal"><img loading="lazy" alt="" style="--ox:8%;--z:1.12;--zx:40%;--zy:48%"
+          src="https://i.ytimg.com/vi/zlcrM8rxalM/maxresdefault.jpg" data-fb="https://i.ytimg.com/vi/zlcrM8rxalM/mqdefault.jpg"
+          onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb='';}else{this.style.display='none';}"></div></div>
+        <span class="dot" style="--c:#E8734A" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg></span>
+        <div class="slot bot c"><div class="eracap">
+          <div class="yr">2018 – 2020</div><h3>Unity · 신체 스캔</h3>
+          <div class="chips"><span>Unity</span><span>Kinect</span><span>C++</span></div>
+        </div></div>
+      </div>
+
+      <!-- 2020–2022 -->
+      <div class="era">
+        <div class="slot top c"><div class="eracap">
+          <div class="yr">2020 – 2022</div><h3>실시간&nbsp;합성 · 그래픽스</h3>
+          <div class="chips"><span>Shader</span><span>Compute Shader</span><span>OpenGL</span></div>
+        </div></div>
+        <span class="dot" style="--c:#D8567A" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5"/><path d="M3.5 13.5L12 18l8.5-4.5"/></svg></span>
+        <div class="slot bot m"><div class="medal"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M28 56v-6h13v6"/>
+          <rect x="18" y="56" width="44" height="32" rx="5"/>
+          <circle cx="40" cy="72" r="10"/><circle cx="40" cy="72" r="3.5" fill="currentColor" stroke="none"/>
+          <rect x="62" y="30" width="40" height="27" rx="4"/>
+          <rect x="68" y="44" width="40" height="27" rx="4" opacity=".6"/>
+          <rect x="72" y="58" width="38" height="27" rx="4" opacity=".38"/>
+          <path d="M52 64l10-8M52 80l14 6" opacity=".5"/>
+        </svg></div></div>
+      </div>
+
+      <!-- 2022–2023 -->
+      <div class="era">
+        <div class="slot top m"><div class="medal"><img loading="lazy" alt="" style="--z:1.85;--zx:50%;--zy:44%;--br:1.12"
+          src="https://i.ytimg.com/vi/S-DT10Makds/maxresdefault.jpg" data-fb="https://i.ytimg.com/vi/S-DT10Makds/mqdefault.jpg"
+          onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb='';}else{this.style.display='none';}"></div></div>
+        <span class="dot" style="--c:#8B5CF6" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5H4v11h5l4 4v-4h7V5z"/></svg></span>
+        <div class="slot bot c"><div class="eracap">
+          <div class="yr">2022 – 2023</div><h3>디지털 휴먼 · LLM</h3>
+          <div class="chips"><span>UniRx / Zenject</span><span>ChatGPT API</span><span>TTS · STT</span></div>
+        </div></div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="era">
+        <div class="slot top c"><div class="eracap">
+          <div class="yr">2024</div><h3>컴퓨터비전 AI</h3>
+          <div class="chips"><span>YOLOv8</span><span>OpenCV</span><span>Python</span></div>
+        </div></div>
+        <span class="dot" style="--c:#3B82F6" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-6.5 10-6.5S22 12 22 12s-4 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+        <div class="slot bot m"><div class="medal"><img loading="lazy" alt="" style="--z:1.06;--br:.94;--ct:1.32"
+          src="assets/gauge-detect.jpg"
+          onerror="this.style.display='none'"></div></div>
+      </div>
+
+      <!-- 2025 -->
+      <div class="era">
+        <div class="slot top m"><div class="medal"><img loading="lazy" alt="" style="--z:2.9;--zx:43%;--zy:34%"
+          src="https://i.ytimg.com/vi/Lgl9JTBiamU/maxresdefault.jpg" data-fb="https://i.ytimg.com/vi/Lgl9JTBiamU/mqdefault.jpg"
+          onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb='';}else{this.style.display='none';}"></div></div>
+        <span class="dot" style="--c:#14B8A6" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.6 7-11a7 7 0 1 0-14 0c0 4.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+        <div class="slot bot c"><div class="eracap">
+          <div class="yr">2025</div><h3>SLAM · 강화학습</h3>
+          <div class="chips"><span>SLAM</span><span>ML-Agents</span><span>C++17</span></div>
+        </div></div>
+      </div>
+
+      <!-- 2026 -->
+      <div class="era">
+        <div class="slot top c"><div class="eracap">
+          <div class="yr">2026</div><h3>로봇 자율주행</h3>
+          <div class="chips"><span>ROS2</span><span>Isaac Sim</span><span>3DGS</span><span>Rust</span></div>
+        </div></div>
+        <span class="dot" style="--c:#22A85A" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9.5 3v4M14.5 3v4M9.5 17v4M14.5 17v4M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></svg></span>
+        <div class="slot bot m"><div class="medal"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <g opacity=".45"><path d="M34 54c5-11 15-18 26-18s21 7 26 18"/><path d="M24 50c7-16 20-26 36-26s29 10 36 26"/></g>
+          <path d="M60 46v-9" opacity=".8"/><circle cx="60" cy="34" r="3.4" fill="currentColor" stroke="none"/>
+          <rect x="43" y="50" width="34" height="26" rx="7"/>
+          <g fill="currentColor" stroke="none"><circle cx="52" cy="62" r="3"/><circle cx="68" cy="62" r="3"/></g>
+          <path d="M46 76v6M74 76v6M40 82h40"/>
+          <circle cx="48" cy="90" r="7"/><circle cx="72" cy="90" r="7"/>
+          <path d="M22 104h76" stroke-dasharray="6 6" opacity=".4"/>
+        </svg></div></div>
+      </div>
+
+    </div>
+  </div>
+  <p class="techsrc">사진은 VIRNECT · FXGear <b>공식 채널에 공개된 영상</b>의 장면과, 알고리즘 검출 결과 이미지입니다.
+    공개 자료가 없거나 기술이 드러나지 않는 시기는 직접 작성한 개념 도식으로 대체했습니다.</p>
+</section>
+
 <section id="projects">
-  <div class="sec-head"><span class="idx">01</span><h2>대표 프로젝트</h2><span class="note">최신순 · 카드 클릭 → 상세</span></div>
+  <div class="sec-head"><span class="idx">02</span><h2>대표 프로젝트</h2><span class="note">회사 / 외부 의뢰 / 개인 R&D 구분 · 최신순</span></div>
+  <p class="projlead">재직 중 수행한 고객·국가R&D·사내 제품화 작업, 재직 경력 밖의 외부 의뢰, 그리고 개인 R&D 프로젝트를 분리해 볼 수 있도록 정리했습니다.</p>
+  <div class="projfilters" aria-label="프로젝트 분류">
+    <button class="projfilter" type="button" data-scope="all" aria-pressed="true">전체</button>
+    <button class="projfilter" type="button" data-scope="company" aria-pressed="false">회사</button>
+    <button class="projfilter" type="button" data-scope="client" aria-pressed="false">외부 의뢰</button>
+    <button class="projfilter" type="button" data-scope="personal" aria-pressed="false">개인 R&D</button>
+  </div>
   <div class="projs" id="projGrid"></div>
+  <noscript>
+    <div class="nojs">
+      <p>※ JavaScript가 꺼져 있어 프로젝트 카드 대신 목록으로 표시합니다.</p>
+      <ul>
+        <li><b>로봇 자율주행·시뮬레이션 통합 플랫폼</b> — 버넥트 <span>2026.03 – 2026.07</span></li>
+        <li><b>로봇 강화학습 시뮬레이터 — 과제 수행부터 제품화까지</b> — 버넥트 / KETI <span>2025.01 – 2026.06</span></li>
+        <li><b>메시 경량화 풀스택 — Rust 코어부터 엔진 통합까지</b> — 버넥트 <span>2026.02 – 2026.06</span></li>
+        <li><b>건축유산 H-BIM 모니터링 · 원형복구</b> — 국가유산청 / 주관 ETRI <span>2024.03 – 2026.03</span></li>
+        <li><b>SLAM 기반 실내 측위 시스템</b> — 과기정통부 스마트제조혁신 <span>2025.01 – 2025.12</span></li>
+        <li><b>세종시립도서관 — 우주측지센터 VR 체험</b> — 버넥트 <span>2024.02 – 2024.10</span></li>
+        <li><b>게이지 인식 알고리즘</b> — KETI 국제공동연구 <span>2024.06 – 2024.08</span></li>
+        <li><b>멀티 바코드·QR 인식</b> — 버넥트 <span>2024.06 – 2024.08</span></li>
+        <li><b>PointCloud 시범 콘텐츠</b> — 버넥트 / ETRI <span>2023.10 – 2023.12</span></li>
+        <li><b>레드버튼 — 보드게임 카페 앱 3종</b> — 외부 프로젝트 <span>2023.02 – 2023.10</span></li>
+        <li><b>VoiceToFace — LLM 디지털 휴먼</b> — 에프엑스기어 <span>2023.05 – 2023.07</span></li>
+        <li><b>XR Poster — 실시간 인물 합성</b> — 에프엑스기어 <span>2020.02 – 2023.07</span></li>
+        <li><b>FXMirror — 신체 스캔 &amp; 가상 피팅</b> — 에프엑스기어 <span>2018.06 – 2023.07</span></li>
+        <li><b>LOTT 헬스버스 — 의료 메타버스</b> — 에프엑스기어 / 소프텍코퍼레이션 <span>2022.08 – 2022.12</span></li>
+        <li><b>Narang — 실시간 렌더링 디지털 휴먼</b> — 에프엑스기어 <span>2021.02 – 2022.08</span></li>
+      </ul>
+    </div>
+  </noscript>
 </section>
 
 <section id="proof">
-  <div class="sec-head"><span class="idx">02</span><h2>문제 해결 하이라이트</h2><span class="note">문제 → 접근 → 결과</span></div>
+  <div class="sec-head"><span class="idx">03</span><h2>문제 해결 하이라이트</h2><span class="note">문제 → 접근 → 결과</span></div>
   <div class="proofgrid">
     <article class="proof reveal">
       <div class="top"><span class="num">01</span><h3>LiDAR SLAM 수직 드리프트 원인 규명</h3></div>
       <dl>
         <dt>문제</dt><dd>FAST-LIO2 맵 생성 중 고도(z)가 계속 흘러 층과 평면이 어긋남.</dd>
         <dt>접근</dt><dd>실기 rosbag을 분석해 <b>센서 장착 tilt</b>를 원인으로 특정하고 보정 적용.</dd>
-        <dt>결과</dt><dd>z-drift 재현 조건과 보정 경로를 정리해 SLAM 튜닝 기준 확보.</dd>
+        <dt>결과</dt><dd>장시간 매핑에서 층·평면이 어긋나던 현상을 <b>해소</b>하고, 재현 조건과 보정 절차를 팀 공용 튜닝 기준으로 문서화.</dd>
       </dl>
       <span class="dom">4족보행 로봇 자율주행 스택 · FAST-LIO2</span>
     </article>
@@ -287,7 +566,7 @@ body.noscroll{overflow:hidden}
       <dl>
         <dt>문제</dt><dd>geometry가 부족한 긴 복도에서 LiDAR-관성 SLAM이 발산.</dd>
         <dt>접근</dt><dd><b>degeneracy 게이트</b>로 위험 구간을 감지하고 leg-velocity와 ground-plane Z 제약을 제한적으로 융합.</dd>
-        <dt>결과</dt><dd>휴머노이드 복도 주행에서 발산 구간을 제어 가능한 상태로 전환.</dd>
+        <dt>결과</dt><dd>발산으로 맵이 깨지던 저특징 복도 구간에서도 <b>궤적을 유지한 채 주행</b>하도록 전환.</dd>
       </dl>
       <span class="dom">휴머노이드 SLAM · LIO-SAM</span>
     </article>
@@ -317,7 +596,7 @@ body.noscroll{overflow:hidden}
       <dl>
         <dt>문제</dt><dd>mesh GraphicsBuffer가 해제되지 않아 장시간 실행 시 native 메모리 누수.</dd>
         <dt>접근</dt><dd>버퍼 생명주기와 Dispose 경로를 명확히 분리하고 공통 패키지 API에 반영.</dd>
-        <dt>결과</dt><dd>런타임 메시 처리 안정성 개선, Unity 공통 모듈의 재사용성 강화.</dd>
+        <dt>결과</dt><dd>장시간 실행 시 계속 증가하던 <b>네이티브 메모리 점유 제거</b>, 공통 패키지 API에 반영해 Unity 팀 전체가 재사용.</dd>
       </dl>
       <span class="dom">Unity 공통 모듈 · 네이티브 브릿지</span>
     </article>
@@ -335,7 +614,7 @@ body.noscroll{overflow:hidden}
 </section>
 
 <section id="dev2026">
-  <div class="sec-head"><span class="idx">03</span><h2>AX / R&D 이니셔티브</h2><span class="note">본 프로젝트 외 · 내부 자동화 / 실험 플랫폼</span></div>
+  <div class="sec-head"><span class="idx">04</span><h2>AX / R&D 이니셔티브</h2><span class="note">본 프로젝트 외 · 내부 자동화 / 실험 플랫폼</span></div>
   <p class="axlead">2026년에는 공식 과제와 별도로, 사내 개발 생산성·로봇 R&D·AI 에이전트 자동화를 위한 <b>내부 AX 도구와 실험 플랫폼</b>을 직접 기획하고 구현했습니다. 납품형 대표 프로젝트가 아니라, 팀이 반복 작업을 줄이고 새로운 로봇/AI 워크플로를 검증하기 위한 기반 작업입니다.</p>
   <div class="axgrid">
     <article class="axcard reveal">
@@ -379,21 +658,127 @@ body.noscroll{overflow:hidden}
   </div>
 </section>
 
+<section id="labs">
+  <div class="sec-head"><span class="idx">05</span><h2>개인 R&D / Private Labs</h2><span class="note">Private repo 중심 · GIF / 도식 / 결과로 요약</span></div>
+  <p class="labintro">개인 저장소는 대부분 private이라 링크보다 <b>문제 배경, 구현 구조, 검증 흔적</b> 중심으로 정리했습니다. 회사 프로젝트와 별도로, 관심 도메인을 직접 파고들며 만든 실험·도구·프로토타입입니다.</p>
+  <div class="labs">
+    <article class="lab reveal">
+      <div class="labmedia contain"><img loading="lazy" src="assets/lab-sensus-oct.png" alt=""></div>
+      <div class="labbody">
+        <div class="labmeta"><span class="labtag">Robotics Simulation</span><span class="labstate">Private</span></div>
+        <h3>Sensus — 로봇 시뮬레이션 스튜디오</h3>
+        <p>물리 엔진은 교체 가능하게 두고, 렌더·센서 충실도를 핵심 IP로 쌓는 합성데이터 파이프라인.</p>
+        <dl>
+          <dt>구현</dt><dd>렌더/센서 코어, 46종 센서, 라벨 데이터셋 생성</dd>
+          <dt>증거</dt><dd>Python 264 + Rust 121 테스트, 센서 갤러리 이미지</dd>
+        </dl>
+        <div class="lablinks"><span>Private repo</span><span>Sensor gallery</span></div>
+      </div>
+    </article>
+
+    <article class="lab reveal">
+      <div class="labmedia"><img loading="lazy" src="assets/lab-fleet-viewer3d.gif" alt=""></div>
+      <div class="labbody">
+        <div class="labmeta"><span class="labtag">Robot Ops Console</span><span class="labstate">Private</span></div>
+        <h3>RSPA Ecosystem — 스택 조립·검증·관제</h3>
+        <p>자율주행 스택을 조립하고, 시뮬레이션에서 검증한 뒤, 멀티로봇 운영 콘솔로 관제하는 실험 생태계.</p>
+        <dl>
+          <dt>구현</dt><dd>rspa · fleet-console · stack-store 연동</dd>
+          <dt>증거</dt><dd>Foxglove WebSocket 프로토콜, 합성 4로봇 fleet 데모 GIF</dd>
+        </dl>
+        <div class="lablinks"><span>Private repo</span><span>3D viewer GIF</span></div>
+      </div>
+    </article>
+
+    <article class="lab reveal">
+      <div class="labmedia contain"><img loading="lazy" src="assets/lab-robopolishsim.gif" alt=""></div>
+      <div class="labbody">
+        <div class="labmeta"><span class="labtag">Robot Surface Simulation</span><span class="labstate">Private</span></div>
+        <h3>RoboPolishSim — 로봇 폴리싱 시뮬레이터</h3>
+        <p>로봇 연마 공정을 SDF와 Preston 모델로 근사해, 소재 제거량과 경로 품질을 검증하는 시뮬레이션.</p>
+        <dl>
+          <dt>구현</dt><dd>SDF 기반 소재 제거, 연마 경로/압력 모델, Unity 데모</dd>
+          <dt>상태</dt><dd>showcase 이미지 보유, 연마 과정 GIF 보강 후보</dd>
+        </dl>
+        <div class="lablinks"><span>Private repo</span><span>GIF 후보</span></div>
+      </div>
+    </article>
+
+    <article class="lab reveal">
+      <div class="labmedia"><img loading="lazy" src="assets/lab-lcc-3dgs.gif" alt=""></div>
+      <div class="labbody">
+        <div class="labmeta"><span class="labtag">3D Reconstruction</span><span class="labstate">Private · Archived</span></div>
+        <h3>lcc-3dgs — LiDAR + 3DGS 복원 실험</h3>
+        <p>창고 LiDAR 데이터와 3D Gaussian Splatting을 연결해 실내 공간 복원 가능성을 검증한 아카이브형 실험.</p>
+        <dl>
+          <dt>구현</dt><dd>LiDAR/이미지 기반 복원 파이프라인, 결과 비교 문서화</dd>
+          <dt>상태</dt><dd>중단 프로젝트로 범위와 한계를 명시해 공개 예정</dd>
+        </dl>
+        <div class="lablinks"><span>Private repo</span><span>Archive</span></div>
+      </div>
+    </article>
+
+    <article class="lab reveal">
+      <div class="labmedia">
+        <svg viewBox="0 0 640 360" role="img" aria-label="">
+          <rect width="640" height="360" fill="currentColor" opacity=".06"/>
+          <g fill="none" stroke="currentColor" stroke-width="3" opacity=".3">
+            <rect x="78" y="82" width="134" height="74" rx="12"/><rect x="252" y="52" width="136" height="74" rx="12"/><rect x="428" y="82" width="134" height="74" rx="12"/>
+            <rect x="144" y="220" width="136" height="74" rx="12"/><rect x="360" y="220" width="136" height="74" rx="12"/>
+          </g>
+          <g stroke="var(--accent)" stroke-width="5" stroke-linecap="round" opacity=".82">
+            <path d="M212 119h40M388 119h40M320 126v70M232 220l58-48M408 220l-58-48"/>
+          </g>
+          <circle cx="320" cy="180" r="38" fill="var(--accent)" opacity=".18"/>
+          <path d="M298 180h44M320 158v44" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="labbody">
+        <div class="labmeta"><span class="labtag">AI Dev OS</span><span class="labstate">Private</span></div>
+        <h3>AI Dev OS — 에이전트 실행 플랫폼</h3>
+        <p>자연어 요청을 계획으로 분해하고, 코드 생성·빌드·테스트·RAG·MCP 도구 실행까지 연결한 개인 자동화 플랫폼.</p>
+        <dl>
+          <dt>구성</dt><dd>ELI · orchestrator · execution-engine · github-rag · mcp-farm</dd>
+          <dt>초점</dt><dd>큐, 권한, 실패 복구, 비용 추적이 있는 실행 시스템</dd>
+        </dl>
+        <div class="lablinks"><span>Private repos</span><span>Architecture</span></div>
+      </div>
+    </article>
+
+    <article class="lab reveal">
+      <div class="labmedia contain"><img loading="lazy" src="https://raw.githubusercontent.com/choo8489/uni-signal/main/assets/rule_mdd_defense.png" alt=""></div>
+      <div class="labbody">
+        <div class="labmeta"><span class="labtag">RL / Quant Research</span><span class="labstate">Public</span></div>
+        <h3>uni-signal — MDD 방어형 자동매매 실험</h3>
+        <p>수익 극대화보다 최대낙폭 방어를 목표로, 룰 기반 시스템과 PPO 강화학습 트랙을 나눠 검증한 개인 연구.</p>
+        <dl>
+          <dt>구현</dt><dd>Walk-forward 백테스트, dry-run/live 안전 플래그, 테스트/차트 재현 스크립트</dd>
+          <dt>결과</dt><dd>국내 ETF 6종 기준 MDD -22.2% → -3.9%로 감소</dd>
+        </dl>
+        <div class="lablinks"><a href="https://github.com/choo8489/uni-signal" target="_blank" rel="noopener">GitHub ↗</a><span>Apache 2.0</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
 <section id="career">
-  <div class="sec-head"><span class="idx">04</span><h2>경력</h2><span class="note">2016 → 현재 · 10년</span></div>
+  <div class="sec-head"><span class="idx">06</span><h2>경력</h2><span class="note">2016 → 현재 · 10년</span></div>
   <div class="tl">
 
     <div class="job reveal">
       <div class="when">2023.10 ~ 현재</div>
       <h3>버넥트 (Virnect) <span class="role">피지컬 AI팀 · 책임연구원</span></h3>
       <ul class="plist">
-        <li><div class="pt">로봇 강화학습 Studio 플랫폼 <span class="yr">KETI · 2025.01–12</span></div><div class="pd">강화학습 기반 휴머노이드 로봇 조작 AI(컵 파지·목표 이동 정책), Studio Editor 및 실험 플랫폼 개발.</div><div style="margin-top:6px"><a class="link" href="https://robotics.virnect.com/products/humanoid-simulation" target="_blank" rel="noopener">제품 페이지 ↗</a></div></li>
+        <li><div class="pt">로봇 자율주행·시뮬레이션 통합 플랫폼 <span class="yr">사내 R&D · 2026.03–07</span></div><div class="pd">Isaac Sim/Newton 시뮬레이션 → SLAM 로컬라이제이션 → 강화학습을 하나의 ROS2 스택으로 통합. map_relocalizer·loop-closure pose graph, 3DGS→PCD 파이프라인, Visual-RL 학습 환경 개발.</div></li>
+        <li><div class="pt">로봇 강화학습 시뮬레이터 <span class="yr">KETI 과제 → 사내 제품 · 2025.01–2026.06</span></div><div class="pd">강화학습 기반 휴머노이드 로봇 조작 AI(컵 파지·목표 이동 정책)를 KETI 과제로 구현하고, 이후 휴머노이드 버추얼 커미셔닝 시뮬레이터의 에디터 프레임워크와 노드 그래프 기반 ML-Agents 저작 모듈을 갖춘 사내 제품으로 이어감.</div><div style="margin-top:6px"><a class="link" href="https://robotics.virnect.com/products/humanoid-simulation" target="_blank" rel="noopener">제품 페이지 ↗</a> <a class="link" href="https://www.youtube.com/watch?v=Lgl9JTBiamU" target="_blank" rel="noopener">데모 영상 ▶</a></div></li>
+        <li><div class="pt">메시 경량화 풀스택 — Rust 코어부터 엔진 통합까지 <span class="yr">사내 R&D · 2026.02–06</span></div><div class="pd">QEM 기반 경량화 엔진(Rust) 직접 구현, 다포맷 변환 CLI/GUI 도구, Unity 네이티브 브릿지(NativeDecimator)까지 하나의 축으로 제품화.</div></li>
         <li><div class="pt">SLAM 기반 측위 시스템 <span class="yr">과기정통부 스마트제조혁신 · 2025.01–12</span></div><div class="pd">단안 카메라 기반 SLAM 알고리즘, 실내 맵 생성 및 작업자 위치 추정(Localization) 기술 개발. Industrial XR 프레임워크 과제의 SLAM 파트 담당.</div></li>
         <li><div class="pt">단안 카메라 기반 Occlusion Culling <span class="yr">과기정통부 스마트제조혁신 · 2025.01–04</span></div><div class="pd">Depth-Anything-V2 기반 단안 Depth 추정 AI 활용, 실시간 Occlusion Culling 및 서버 연동 처리 구조 구현.</div></li>
         <li><div class="pt">건축유산 H-BIM 모니터링·원형복구 <span class="yr">국가유산청 · 주관 ETRI · 2024.03–2026.03</span></div><div class="pd">기후피해 대응 건축유산 3D 프로토타이핑, 실태조사 입력 UI, IoT 센서 인터페이스, 조립 시뮬레이션 및 AR 가시화 iPad 앱 개발.</div><div style="margin-top:6px"><a class="link" href="https://www.youtube.com/watch?v=5SSMtwgmR2c" target="_blank" rel="noopener">버넥트 공식 소개 영상 ▶</a></div></li>
         <li><div class="pt">게이지 인식 알고리즘 <span class="yr">KETI 국제공동연구 · 2024.06–08</span></div><div class="pd">비전 AI 기반 압력계·게이지 자동 인식, 초침 위치 분석 위험도 판단 알고리즘 개발.</div></li>
-        <li><div class="pt">XR 기반 우주 체험 <span class="yr">세종청사 · 2024.01–10</span></div><div class="pd">XR 장비 기반 공간 인식·사용자 신체 정보 추정, 실감형 우주 체험 XR 애플리케이션 개발.</div></li>
+        <li><div class="pt">세종시립도서관 — 우주측지센터 VR 체험 <span class="yr">2024.02–10</span></div><div class="pd">Oculus Quest3 기반 실감형 우주 체험 VR 앱. 공간 인식·사용자 신체 정보 추정, 시나리오 5종, PC 서버 연동 구조 개발. 2024년 12월 세종시립도서관 XR 체험존에서 정식 운영 시작.</div><div style="margin-top:6px"><a class="link" href="https://www.ccnnews.co.kr/news/articleView.html?idxno=355378" target="_blank" rel="noopener">정식 운영 보도 ↗</a></div></li>
         <li><div class="pt">멀티 바코드·QR 인식 <span class="yr">POC · 2024.06–08</span></div><div class="pd">YOLO 기반 QR·바코드 멀티 객체 인식 알고리즘 개발.</div></li>
+        <li><div class="pt">PointCloud 시범 콘텐츠 <span class="yr">ETRI · 2023.10–12</span></div><div class="pd">iPad에서 ETRI 포인트클라우드 데이터를 렌더링하고 로봇 배송·노유자 경로·화재 대응 시나리오를 시현. 1,600만 vertex를 프레임 드랍 없이 처리.</div></li>
       </ul>
     </div>
 
@@ -431,7 +816,7 @@ body.noscroll{overflow:hidden}
 </section>
 
 <section id="edu">
-  <div class="sec-head"><span class="idx">05</span><h2>기타</h2></div>
+  <div class="sec-head"><span class="idx">07</span><h2>기타</h2></div>
   <div class="two">
     <div class="panel reveal">
       <h3>학력</h3>
@@ -441,15 +826,16 @@ body.noscroll{overflow:hidden}
     </div>
     <div class="panel reveal">
       <h3>핵심 강점</h3>
-      <p>· 신규 도메인(로봇·SLAM·강화학습) 빠른 학습 → 제품·데모화</p>
-      <p>· 디지털 휴먼·XR·컴퓨터비전 전반의 폭넓은 실전 경험</p>
-      <p>· Unity/C++/Python부터 인프라(AWS·Docker)까지 풀스택</p>
+      <p>· <b>알고리즘 코어부터 제품까지 한 축으로</b> — Rust로 QEM 경량화 엔진을 직접 구현하고, 변환 CLI/GUI 도구와 Unity 네이티브 브릿지까지 혼자 이어붙여 사내 제품으로 배포</p>
+      <p>· <b>파트 단독 책임 경험</b> — 국가R&D 과제의 SLAM 파트를 단독으로 맡아 C++11→C++17 마이그레이션, 크래시 대응, 디버깅 뷰어 제작까지 SDK 단위로 수행</p>
+      <p>· <b>상용 제품 장기 운영</b> — 29개국 520대가 설치된 FXMirror를 5년간 유지보수하며 삼성·포스코·징동 등 고객사와 직접 협업</p>
+      <p>· <b>도메인 전환 이력</b> — 웹·클라우드 → Unity·XR·그래픽스 → 컴퓨터비전 → SLAM·강화학습·로봇 자율주행으로 축을 세 번 옮기며 매번 실제 동작하는 결과물 산출</p>
     </div>
   </div>
 </section>
 
 <section id="links">
-  <div class="sec-head"><span class="idx">06</span><h2>링크</h2></div>
+  <div class="sec-head"><span class="idx">08</span><h2>링크</h2></div>
   <div class="links">
     <a class="linkbtn" href="https://robotics.virnect.com/products/humanoid-simulation" target="_blank" rel="noopener">Virnect Robotics <span class="m">↗</span></a>
   </div>
@@ -596,8 +982,10 @@ const DIAGRAM = {
     +'<path d="M118 112L64 58M118 112l84-40M118 112l100 26M118 112l-58 34" stroke="'+A+'" stroke-opacity=".5" stroke-dasharray="4 4"/>'
     +'<text x="30" y="26" font-family="monospace" font-size="9" fill="'+A+'">localization</text>'),
 };
+/* 기간 표기 규칙: 종료된 과제는 'YYYY.MM – YYYY.MM', 종료일 미확정은 'YYYY.MM ~'
+   정렬 규칙: 종료월 기준 최신순 (종료일 미확정은 해당 연도 그룹 끝) */
 const PROJECTS = [
- {org:'버넥트 · 2026', title:'로봇 자율주행·시뮬레이션 통합 플랫폼', period:'2026.03 – 2026.07', team:'주개발',
+ {id:'robot-nav', end:'2026.07', org:'버넥트 · 2026', title:'로봇 자율주행·시뮬레이션 통합 플랫폼', period:'2026.03 – 2026.07', team:'주개발',
   skills:['ROS2','Isaac Sim','Newton','3DGS','강화학습','Python'], head:{t:'svg',k:'nav',cap:'개념 도식'},
   summary:'로봇의 시뮬레이션 → SLAM/로컬라이제이션 → 강화학습을 하나의 ROS2 스택으로 통합한 사내 로봇 R&D 핵심 플랫폼. 이후의 플릿 운영 콘솔과 스택 프로비저닝 도구가 모두 이 규약을 기준으로 동작합니다.',
   sections:[
@@ -605,16 +993,18 @@ const PROJECTS = [
    {h:'성과', items:['시뮬레이션 → 로컬라이제이션 → 강화학습을 단일 ROS2 파이프라인으로 연결해, 흩어져 있던 실험을 재현 가능한 루프로 정리','이후 플릿 운영 콘솔·스택 프로비저닝 도구가 이 규약을 기준으로 동작하도록 사내 표준 역할 수행']},
   ], links:[]},
 
- {org:'버넥트 · 2026', title:'로봇 시뮬레이터 & 강화학습 노드 저작 도구', period:'2026.01 – 2026.06', team:'주개발',
-  skills:['C#','Unity 6','ML-Agents','ONNX Runtime','URDF','UI Toolkit'], head:{t:'svg',k:'sim',cap:'개념 도식'},
-  summary:'자동화 공정용 휴머노이드 버추얼 커미셔닝 시뮬레이터(사내 제품)와, 코드로 작성하던 강화학습 환경을 노드 그래프로 저작할 수 있게 만든 ML-Agents 확장 모듈. 두 축을 함께 설계·구현했습니다.',
+ {id:'rl-studio', end:'2026.06', org:'버넥트 · 2025–2026', title:'로봇 강화학습 시뮬레이터 — 과제 수행부터 제품화까지', period:'2025.01 – 2026.06', team:'2025 개발자 3 · PM 1 · 디자인 1 / 2026 주개발',
+  skills:['ML-Agents','Unity 6','C#','C++','Python','ONNX Runtime','URDF','UI Toolkit'], head:{t:'yt',id:'Lgl9JTBiamU',mfit:'--z:2.1;--zx:50%;--zy:20%'},
+  summary:'Studio 안에서 로봇과 환경을 구성해 실제 로봇 조작과 유사한 강화학습 시뮬레이션을 수행하는 시스템.\n2025년 KETI 과제로 컵 파지·목표 이동 정책 학습을 구현했고, 2026년에는 자동화 공정용 휴머노이드 버추얼 커미셔닝 시뮬레이터와 노드 그래프 기반 RL 저작 환경을 갖춘 사내 제품으로 이어 붙였습니다.',
   sections:[
-   {h:'담당 기능 · 시뮬레이터', items:['에디터 프레임워크 — 노드 에디터 연동, 도킹 시스템·드래그 상태 머신, SceneView/Hierarchy/Inspector UX','God-class(EditView)를 partial 분할하는 대규모 리팩터링','강화학습 스튜디오 통합 — Episode TimeScale, RL 프레임워크 연동, NodeGraph 기반 self-contained 추론','단축키·입력 시스템(F2 리네임, WASD·UI 입력 충돌 해결)','룰 기반 로봇 파이프라인(Pick-and-Place / AMR) 설계 문서화, URDF 진단 도구']},
-   {h:'담당 기능 · RL 노드 모듈', items:['멀티 트레이닝 에어리어 구조, Variable 시스템, 노드 복사/붙여넣기, Undo/Redo, 배열 포트 메타데이터 모델','Handler 패턴 분리, 멀티 인스턴스 학습(InstanceCount)','ONNX Runtime 기반 self-contained 추론','샘플 — 물체 찾기 리워드 체인, 4족보행 샘플, 룰 기반 컵 파지 파이프라인']},
-   {h:'성과', items:['시뮬레이터 에디터·RL 저작 환경을 제품 수준으로 구축','SonarQube 정적분석 이슈 배치 개선으로 코드 품질 관리']},
-  ], links:[]},
+   {h:'2025 · 강화학습 파이프라인 (KETI 과제)', items:['ML-Agents로 컵을 잡아 박스로 옮기는 로봇 조작 강화학습 파이프라인 구현','FSM(상태 기반 로직)으로 학습과 추론 단계를 분리한 새로운 추론 방식 설계','ML-Agents 환경 자동 설치 및 서버 자동 실행 로직 개발','로봇 조작 Action 다양화 (Teleport, Ready Pose 등)','클릭 한 번으로 환경 준비부터 학습까지 자동 실행되는 원클릭 강화학습 시스템','YamlDotNet 기반 강화학습 파라미터 편집 기능','SLAM/로봇 환경을 다양한 조건에서 재사용 가능한 범용 환경 구성 로직 설계']},
+   {h:'2025 · UI/UX · URDF', items:['Home 화면 UX 고도화(라이프사이클·정렬·검색/필터)','Toast·Dialog·SlideToggle 등 UI 애니메이션 모듈화, 다국어(Localization) 시스템','URDF 파일 비동기 로딩 구조 개발','런타임 URDF 사용을 위한 Mesh Convex·Material 이슈 해결']},
+   {h:'2026 · 시뮬레이터 에디터 제품화', items:['에디터 프레임워크 — 노드 에디터 연동, 도킹 시스템·드래그 상태 머신, SceneView/Hierarchy/Inspector UX','God-class(EditView)를 partial 분할하는 대규모 리팩터링','강화학습 스튜디오 통합 — Episode TimeScale, RL 프레임워크 연동, NodeGraph 기반 self-contained 추론','단축키·입력 시스템(F2 리네임, WASD·UI 입력 충돌 해결)','룰 기반 로봇 파이프라인(Pick-and-Place / AMR) 설계 문서화, URDF 진단 도구']},
+   {h:'2026 · RL 노드 저작 모듈', items:['코드로 작성하던 강화학습 환경을 노드 그래프로 저작하도록 전환한 ML-Agents 확장 모듈','멀티 트레이닝 에어리어 구조, Variable 시스템, 노드 복사/붙여넣기, Undo/Redo, 배열 포트 메타데이터 모델','Handler 패턴 분리, 멀티 인스턴스 학습(InstanceCount)','ONNX Runtime 기반 self-contained 추론','샘플 — 물체 찾기 리워드 체인, 4족보행 샘플, 룰 기반 컵 파지 파이프라인']},
+   {h:'성과', items:['로봇이 컵을 안정적으로 잡고 박스로 옮기는 강화학습 모델 구현 성공','“하나의 파이프라인에 모든 학습 로직 통합이 어려움” → 학습 단위를 Action 단위로 분리하고 FSM 기반 추론 구조로 해결','기획 리소스 부족 상황에서 커뮤니케이션을 주도해 요구사항을 스스로 정의하며 프로젝트 리딩','과제 산출물에 그치지 않고 시뮬레이터 에디터·RL 저작 환경을 갖춘 사내 제품으로 이어감','SonarQube 정적분석 이슈 배치 개선으로 코드 품질 관리']},
+  ], links:[{l:'데모 영상 (YouTube)',u:'https://www.youtube.com/watch?v=Lgl9JTBiamU'}]},
 
- {org:'버넥트 · 2026', title:'메시 경량화 풀스택 — Rust 코어부터 엔진 통합까지', period:'2026.02 – 2026.06', team:'주개발',
+ {id:'mesh', end:'2026.06', org:'버넥트 · 2026', title:'메시 경량화 풀스택 — Rust 코어부터 엔진 통합까지', period:'2026.02 – 2026.06', team:'주개발',
   skills:['Rust','C#','QEM','egui','FreeCAD','C#/Rust FFI'], head:{t:'svg',k:'mesh',cap:'개념 도식'},
   summary:'대용량 3D 메시 경량화를 알고리즘 코어(Rust)부터 도구·엔진 통합까지 한 축으로 직접 구현했습니다.',
   sections:[
@@ -622,16 +1012,7 @@ const PROJECTS = [
    {h:'성과', items:['경량화 알고리즘 → 독립 도구 → 엔진 패키지까지 하나의 축으로 제품화','Unity 팀의 메시 변환 반복 작업을 도구화해 자동화']},
   ], links:[]},
 
- {org:'KETI · 2025', title:'로봇 강화학습 Studio 플랫폼', period:'2025.01 – 2025.12', team:'개발자 3 · PM 1 · 디자인 1',
-  skills:['ML-Agents','C++','Python','Unity','URDF'], head:{t:'yt',id:'Lgl9JTBiamU'},
-  summary:'Studio 안에서 로봇과 환경을 구성해 실제 로봇 조작과 유사한 강화학습 시뮬레이션을 수행하는 시스템. 컵 파지 및 목표 위치 이동 정책을 학습.',
-  sections:[
-   {h:'담당 기능 · ML-Agents', items:['ML-Agents로 컵을 잡아 박스로 옮기는 로봇 조작 강화학습 파이프라인 구현','FSM(상태 기반 로직)으로 학습과 추론 단계를 분리한 새로운 추론 방식 설계','ML-Agents 환경 자동 설치 및 서버 자동 실행 로직 개발','로봇 조작 Action 다양화 (Teleport, Ready Pose 등)','클릭 한 번으로 환경 준비부터 학습까지 자동 실행되는 원클릭 강화학습 시스템','YamlDotNet 기반 강화학습 파라미터 편집 기능','SLAM/로봇 환경을 다양한 조건에서 재사용 가능한 범용 환경 구성 로직 설계']},
-   {h:'담당 기능 · UI/UX · URDF', items:['Home 화면 UX 고도화(라이프사이클·정렬·검색/필터)','Toast·Dialog·SlideToggle 등 UI 애니메이션 모듈화, 다국어(Localization) 시스템','URDF 파일 비동기 로딩 구조 개발','런타임 URDF 사용을 위한 Mesh Convex·Material 이슈 해결']},
-   {h:'성과', items:['“하나의 파이프라인에 모든 학습 로직 통합이 어려움” → 학습 단위를 Action 단위로 분리하고 FSM 기반 추론 구조로 해결','기획 리소스 부족 상황에서 커뮤니케이션을 주도해 요구사항을 스스로 정의하며 프로젝트 리딩','로봇이 컵을 안정적으로 잡고 박스로 옮기는 강화학습 모델 구현 성공']},
-  ], links:[{l:'데모 영상 (YouTube)',u:'https://www.youtube.com/watch?v=Lgl9JTBiamU'}]},
-
- {org:'과기정통부 스마트제조혁신기술개발 · 2025', title:'SLAM 기반 실내 측위 시스템', period:'2025.01 – 2025.12', team:'SLAM 파트 단독 담당',
+ {id:'slam-sdk', end:'2025.12', org:'과기정통부 스마트제조혁신기술개발 · 2025', title:'SLAM 기반 실내 측위 시스템', period:'2025.01 – 2025.12', team:'SLAM 파트 단독 담당',
   skills:['C++','Unity','SLAM SDK','Depth-Anything-V2'], head:{t:'svg',k:'sdk',cap:'개념 도식'},
   summary:'SLAM으로 생성한 맵 기반 실시간 측위·증강을 수행하고, 사용자 위치를 관제센터에서 모니터링할 수 있는 SLAM SDK 및 Occlusion Culling 기능 개발.',
   sections:[
@@ -640,7 +1021,7 @@ const PROJECTS = [
   ], links:[],
   note:'국가R&D 「(세부6-1) 제조 현장 맞춤형 Industrial XR 프레임워크 개발」(과기정통부 · 스마트제조혁신기술개발, 전문기관 IITP, 주관 한국전자기술연구원) 과제에서 SLAM 파트를 담당했습니다. 과제 개요는 NTIS에서 과제명으로 조회할 수 있습니다.'},
 
- {org:'국가유산청 / 주관 ETRI · 2024–2026', title:'건축유산 H-BIM 모니터링 · 원형복구', period:'2024.03 – 2026.03', team:'주개발',
+ {id:'hbim', end:'2026.03', org:'국가유산청 / 주관 ETRI · 2024–2026', title:'건축유산 H-BIM 모니터링 · 원형복구', period:'2024.03 – 2026.03', team:'주개발',
   skills:['C#','Unity 6','MVVM','UniRx','DOTween','iPad'], head:{t:'yt',id:'5SSMtwgmR2c'},
   summary:'기후피해에 대응한 건축유산 H-BIM 모니터링 iPad 앱. 건축유산 3D 프로토타이핑, 실태조사 결과 입력 UI, IoT 모니터링 센서 인터페이스, AR 가시화와 부재 조립 시뮬레이션을 개발했습니다.',
   sections:[
@@ -649,29 +1030,30 @@ const PROJECTS = [
   ], links:[{l:'버넥트 공식 소개 영상 (YouTube)',u:'https://www.youtube.com/watch?v=5SSMtwgmR2c'}],
   note:'국가R&D 「기후피해 원형복구 지원용 스캔데이터 기반 지능형 건축유산정보모델링 기술개발 및 실증」(국가유산청 · 기후변화대응국가유산보존관리기술개발, 전문기관 국립문화유산연구원, 주관 한국전자통신연구원) 과제의 XR 가시화·조립 시뮬레이션 앱 개발을 담당했습니다. 과제 개요는 NTIS에서 과제명으로 조회할 수 있습니다.'},
 
- {org:'KETI 국제공동연구 · 2024', title:'게이지 인식 알고리즘', period:'2024.06 – 2024.08', team:'개발자 1 (단독)',
-  skills:['Python','YOLOv8','OpenCV','딥러닝'], head:{t:'svg',k:'gauge',cap:'개념 도식'},
+ {id:'gauge', end:'2024.08', org:'KETI 국제공동연구 · 2024', title:'게이지 인식 알고리즘', period:'2024.06 – 2024.08', team:'개발자 1 (단독)',
+  skills:['Python','YOLOv8','OpenCV','딥러닝'], head:{t:'bg',src:'assets/gauge-detect.jpg',cap:'알고리즘 검출 결과'},
   summary:'로봇이 촬영한 영상에서 압력계를 인식하고 필요한 데이터를 정확히 추출하는 딥러닝(YOLOv8) 알고리즘 개발.',
   sections:[
    {h:'담당 기능', items:[{t:'딥러닝 기반 압력계 데이터 검출', s:['YOLOv8 인식 모델용 학습 데이터 준비·모델 학습','딥러닝 서버 환경 직접 구축(효율적 셋팅·구동 환경 구성)']},{t:'컴퓨터 비전 전처리로 인식 정확도 향상'},{t:'재사용성·유지보수 고려한 모듈화 설계'}]},
    {h:'문제 해결 방식', items:['컴퓨터 비전 + 딥러닝을 결합해 압력계를 정확히 인식하도록 해결','인식이 어려운 상황에서 전처리 개선·최적화, 오차/왜곡 감소를 위한 다양한 실험']},
   ], links:[]},
 
- {org:'버넥트 · 2024', title:'세종시립도서관 — 우주측지센터 VR 체험', period:'2024.02 – 2024.10', team:'팀장 1 · 기획 1 · 개발 1(이동주) · 디자인 1 · 3D 2',
+ {id:'space-vr', end:'2024.10', org:'버넥트 · 2024', title:'세종시립도서관 — 우주측지센터 VR 체험', period:'2024.02 – 2024.10', team:'팀장 1 · 기획 1 · 개발 1(이동주) · 디자인 1 · 3D 2',
   skills:['Unity','Oculus Quest3','XRI','Shader','REST(C#)'], head:{t:'yt',id:'nc9PrFGDNb8'},
   summary:'세종시립도서관에서 Oculus Quest3를 착용하고 우주측지센터를 가상 체험하는 실감형 VR 앱. 총 5개 시나리오로 구성되며, 빔프로젝터 영상 재생(PC 서버)과 연동되고 어디에 설치해도 Splash 시작 위치를 기준으로 동작.',
   sections:[
    {h:'담당 기능', items:['Oculus Quest3 클라이언트 + Windows PC REST 서버(C#) 구조 설계 — 콘텐츠 Index를 서버에서 지정','우주 체험 시나리오 5종 구현','VIRNECT Make 저작 데이터를 전용 임포터로 불러와 런타임 비주얼라이징(2·3·5번 시나리오)','XRI 기반 인터랙션 — 이벤트 발생 오브젝트를 인터랙터블로 구성','설치 위치 무관 동작 — Splash 시작 위치를 기준(Position)으로 캘리브레이션','ProjectInstaller/SceneContext로 전역·씬 의존성 분리(Zenject)','Space 콘텐츠 셰이더·에셋 구성 (ShaderLab/HLSL 다수)']},
-  ], links:[{l:'데모 영상 (YouTube)',u:'https://www.youtube.com/watch?v=nc9PrFGDNb8'}]},
+   {h:'성과', items:['2024년 12월 세종시립도서관 XR 체험존에서 정식 운영 시작 — 도서관 누리집 선착순 예약제로 상시 개방','개발한 시나리오 5종이 그대로 정식 콘텐츠로 서비스 (태양계의 탄생 / 홍보관 체험 / 관측 체험 / 정보 활용 / OX 퀴즈)','국토교통부·국토교통과학진흥원 지원 사업으로, 우주측지관측센터를 방문하지 않고도 체험 가능한 공공 콘텐츠로 공개']},
+  ], links:[{l:'데모 영상 (YouTube)',u:'https://www.youtube.com/watch?v=nc9PrFGDNb8'},{l:'정식 운영 보도 (충청뉴스)',u:'https://www.ccnnews.co.kr/news/articleView.html?idxno=355378'},{l:'세종시 공식 블로그 소개',u:'https://blog.naver.com/sejong_story/223687074424'}]},
 
- {org:'버넥트 · 2024', title:'멀티 바코드·QR 인식', period:'2024.06 – 2024.08', team:'—',
+ {id:'barcode', end:'2024.08', org:'버넥트 · 2024', title:'멀티 바코드·QR 인식', period:'2024.06 – 2024.08', team:'—',
   skills:['Python','YOLO','OpenCV','딥러닝'], head:{t:'svg',k:'code',cap:'개념 도식'},
   summary:'YOLO 기반으로 QR 코드와 바코드를 동시에(멀티 객체) 인식하는 알고리즘 개발 (POC).',
   sections:[
    {h:'담당 기능', items:['YOLO 기반 QR·바코드 멀티 객체 인식 알고리즘 개발','다중 객체 동시 검출을 위한 학습 데이터 구성·모델 학습','컴퓨터 비전 기반 영상 전처리']},
   ], links:[]},
 
- {org:'에프엑스기어 · 2023', title:'VoiceToFace — LLM 디지털 휴먼', period:'2023.05 ~', team:'—',
+ {id:'voicetoface', end:'2023.07', org:'에프엑스기어 · 2023', title:'VoiceToFace — LLM 디지털 휴먼', period:'2023.05 – 2023.07', team:'—',
   skills:['ChatGPT API','TTS/STT','Unity'], head:{t:'yt',id:'S-DT10Makds'},
   summary:'LLM(Large Language Model)과 디지털 휴먼 기술을 접목한, 실시간 상호작용 가능한 대화형 디지털 휴먼.',
   sections:[
@@ -680,7 +1062,7 @@ const PROJECTS = [
   ], links:[{l:'FXGear AI 휴먼 키오스크 (YouTube)',u:'https://www.youtube.com/watch?v=S-DT10Makds'}],
   note:'본 과제 자체의 데모 영상·화면은 사내 규정상 비공개입니다. 위 영상은 동일 기술 계열의 회사 공개 제품 영상입니다.'},
 
- {org:'에프엑스기어 · 2020–2023', title:'XR Poster — 실시간 인물 합성', period:'2020.02 ~', team:'Unity 1 · 연구원 2 · 디자인 1',
+ {id:'xrposter', end:'2023.07', org:'에프엑스기어 · 2020–2023', title:'XR Poster — 실시간 인물 합성', period:'2020.02 – 2023.07', team:'Unity 1 · 연구원 2 · 디자인 1',
   skills:['Unity','Azure Kinect','Shader','Barracuda(ONNX)'], head:{t:'yt',id:'uuHIF3RhkPs'},
   summary:'크로마키 설치 없이 실시간으로 사용자를 각 테마에 사실적으로 합성하는 차세대 실감형 XR 솔루션.\n영화 포스터: 기생충·해적2·외계인·비상선언·정직한후보2 / 전시: 유에민쥔·NCT',
   sections:[
@@ -688,7 +1070,7 @@ const PROJECTS = [
    {h:'진행 중이던 확장', items:['클라우드 없이 Barracuda로 온디바이스 딥러닝 적용','딥러닝 모델 호환 ONNX 변환','Kinect 대체 웹캠·DSLR 테스트']},
   ], links:[{l:'XR POSTER 홍보영상 (YouTube)',u:'https://www.youtube.com/watch?v=uuHIF3RhkPs'},{l:'NCT DREAM VIBE 가이드영상 (YouTube)',u:'https://www.youtube.com/watch?v=ZgRoQjDVHpM'},{l:'비상선언 XR 포스터 기사 (KOIT)',u:'http://www.koit.co.kr/news/articleView.html?idxno=100290'}]},
 
- {org:'에프엑스기어 · 2018–2023', title:'FXMirror — 신체 스캔 & 가상 피팅', period:'2018.06 ~ 2023', team:'—',
+ {id:'fxmirror', end:'2023.07', org:'에프엑스기어 · 2018–2023', title:'FXMirror — 신체 스캔 & 가상 피팅', period:'2018.06 – 2023.07', team:'—',
   skills:['C++','OpenCV','Unity','Kinect'], head:{t:'yt',id:'zlcrM8rxalM'},
   summary:'신체를 스캔해 가상으로 의상을 착용하는 서비스. 리얼모드(실제 모습)·아바타모드(3D 아바타) 제공.\n29개국 수출 · 520대 설치 (회사 발표 기준).',
   sections:[
@@ -696,7 +1078,7 @@ const PROJECTS = [
    {h:'성과', items:['NGUI·UGUI 양쪽 UI 라이브러리 숙련','실시간 Depth·BodyTracking으로 신체 사이즈 측정 기술','아바타 동적 생성으로 Joint 구조·스키닝 이해','5년간 다양한 기업 협업으로 커뮤니케이션·프로세스 역량']},
   ], links:[{l:'FXMirror AvatarMode (YouTube)',u:'https://www.youtube.com/watch?v=zlcrM8rxalM'},{l:'FXMirror Smart Shopping (YouTube)',u:'https://www.youtube.com/watch?v=TEPGgl686-w'}]},
 
- {org:'에프엑스기어 · 2021–2022', title:'Narang — 실시간 렌더링 디지털 휴먼', period:'2021.02 – 2022.08', team:'—',
+ {id:'narang', end:'2022.08', org:'에프엑스기어 · 2021–2022', title:'Narang — 실시간 렌더링 디지털 휴먼', period:'2021.02 – 2022.08', team:'—',
   skills:['C++','NDK','OpenGL','Compute Shader','Unity'], head:{t:'bg',src:'assets/card-lightfield.jpg',cap:'AI 생성 이미지 · 실제 화면 아님'},
   summary:'디지털 휴먼 기반 실시간 인터랙티브 경험 플랫폼. 시점 기반 광원효과와 LightField Rendering으로 사실적인 아바타를 구현하고, 사용자 움직임·음성을 인식해 시선·동작을 맞춤. (스터디/AR/PhotoCard 3가지 모드)',
   sections:[
@@ -705,7 +1087,7 @@ const PROJECTS = [
   ], links:[{l:'서비스 출시 기사 (데이터넷)',u:'http://www.datanet.co.kr/news/articleView.html?idxno=171596'}],
   note:'서비스 종료로 공식 사이트·홍보영상은 현재 접속되지 않습니다.'},
 
- {org:'에프엑스기어 / 소프텍코퍼레이션 · 2022', title:'LOTT 헬스버스 — 의료 메타버스', period:'2022.08 – 2022.12', team:'—',
+ {id:'lott', end:'2022.12', org:'에프엑스기어 / 소프텍코퍼레이션 · 2022', title:'LOTT 헬스버스 — 의료 메타버스', period:'2022.08 – 2022.12', team:'—',
   skills:['Unity','UniRx','Zenject','UniTask'], head:{t:'bg',src:'assets/card-pulse.jpg',cap:'AI 생성 이미지 · 실제 화면 아님'},
   summary:'헬스케어를 서비스로 하는 전문의료 메타버스 플랫폼 앱. 대화형 디지털휴먼으로 의료상담을 제공하며, 디지털휴먼은 LightField Rendering으로 제작.',
   sections:[
@@ -713,7 +1095,7 @@ const PROJECTS = [
    {h:'성과', items:['MVP 패턴으로 Presenter·View 분리, 유지보수 향상','Zenject DI 구조 이해·데이터 전달 편의','UniTask 비동기 코드 직접 구현','UniRx ReactiveProperty 기반 반응형 UI']},
   ], links:[{l:'125억 규모 계약 기사 (머니투데이)',u:'https://www.mt.co.kr/tech/2022/09/26/2022092614120144032'},{l:'디지털 닥터 개발 기사 (테크42)',u:'https://www.tech42.co.kr/%EC%97%90%ED%94%84%EC%97%91%EC%8A%A4%EA%B8%B0%EC%96%B4-lott-%ED%97%AC%EC%8A%A4%EB%B2%84%EC%8A%A4-%EB%94%94%EC%A7%80%ED%84%B8-%EB%8B%A5%ED%84%B0-%EA%B8%B0%EC%88%A0-%EA%B0%9C%EB%B0%9C/'}]},
 
- {org:'외부 프로젝트 · 2023', title:'레드버튼 — 보드게임 카페 앱 3종', period:'2023.02 ~', team:'Unity 2 · 서버 2 · 디자인 2 · 관리 1',
+ {id:'redbutton', end:'2023.10', scope:'client', org:'외부 의뢰 · 2023', title:'레드버튼 — 보드게임 카페 앱 3종', period:'2023.02 – 2023.10', team:'Unity 2 · 서버 2 · 디자인 2 · 관리 1',
   skills:['Unity','Swift','Firebase','iOS'], head:{t:'svg',k:'app',cap:'개념 도식'},
   summary:'매장 카운터앱·매장 전용앱·유저 전용앱 3종. 카운터앱은 주문 접수·유저 호출, 전용앱은 보드게임 선택·메뉴 주문·게임 추천 담당.',
   sections:[
@@ -722,7 +1104,7 @@ const PROJECTS = [
   ], links:[{l:'레드버튼 전용앱 소개',u:'https://redbutton.co.kr/boardgame/보드게임카페-전용앱/'}],
   note:'재직 경력이 아닌 외부 참여 프로젝트입니다. 매장 운영 화면은 고객사 자산이라 비공개 처리했습니다.'},
 
- {org:'버넥트 / ETRI · 2023', title:'PointCloud 시범 콘텐츠', period:'2023.10 – 2023.12', team:'—',
+ {id:'pointcloud', end:'2023.12', org:'버넥트 / ETRI · 2023', title:'PointCloud 시범 콘텐츠', period:'2023.10 – 2023.12', team:'—',
   skills:['Unity','PointCloud','NavMesh','VFX'], head:{t:'svg',k:'cloud',cap:'개념 도식'},
   summary:'iPad에서 ETRI 포인트클라우드 데이터를 렌더링하고, 사업성 있는 시나리오(로봇 배송·노유자 경로·화재 상황)를 시현하는 애플리케이션.',
   sections:[
@@ -730,41 +1112,80 @@ const PROJECTS = [
   ], links:[], note:'BTB 프로젝트로 실사진·영상 비공개'},
 ];
 
+/* 선언 순서와 무관하게 항상 '최신순'(종료월 내림차순)을 보장 — 항목을 나중에 추가해도 정렬이 깨지지 않음 */
+PROJECTS.sort(function(a,b){return String(b.end).localeCompare(String(a.end));});
+
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 /* href/src 전용: http(s)만 허용해 javascript: 등 차단 */
 function escUrl(u){var s=String(u);return /^https?:\/\//i.test(s)?esc(s):'#';}
+function projectScope(p){return p.scope||'company';}
+function scopeLabel(p){
+  var s=projectScope(p);
+  if(s==='client') return '외부 의뢰';
+  if(s==='personal') return '개인 R&D';
+  if(s==='academic') return '학업';
+  return '회사';
+}
+function emptyProjectHTML(scope){
+  var msg=scope==='personal'
+    ? '<b>개인 R&D 프로젝트는 정리 중입니다.</b><br>Private 저장소 중심이라 GitHub 링크 대신 문제 배경, 구조 도식, 핵심 구현, 결과를 짧은 케이스 스터디로 보여줄 예정입니다.'
+    : '<b>해당 분류의 프로젝트가 아직 없습니다.</b>';
+  return '<div class="projempty">'+msg+'</div>';
+}
 function itemHTML(it){
   if(typeof it==='string') return '<li>'+esc(it)+'</li>';
   var h='<li>'+esc(it.t);
   if(it.s&&it.s.length){h+='<ul>'+it.s.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';}
   return h+'</li>';
 }
-function headInner(p,lazy){
-  if(p.head.t==='yt') return '<img '+(lazy?'loading="lazy" ':'')+'src="'+escUrl(YT(p.head.id))+'" alt="" onerror="this.style.display=\'none\'"><div class="play"><span>&#9654;</span></div>';
+function headInner(p,lazy,modal){
+  /* 모달 헤더에서만 적용되는 크롭 보정 (카드 썸네일은 제목이 이미지 밖에 있어 원본 그대로 둔다) */
+  var fr=(modal&&p.head.mfit)?' style="'+esc(p.head.mfit)+'"':'';
+  if(p.head.t==='yt'){
+    var yid=p.head.id;
+    /* maxres(1280×720, 16:9) 우선 → 없으면 hq(480×360)로 폴백 → 둘 다 없으면 숨김 */
+    return '<img '+(lazy?'loading="lazy" ':'')+fr+' src="'+escUrl('https://i.ytimg.com/vi/'+yid+'/maxresdefault.jpg')+'" alt="" '
+      + 'data-fb="'+escUrl(YT(yid))+'" onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=\'\';}else{this.style.display=\'none\';}">'
+      + '<a class="play" data-yt="1" href="'+escUrl('https://www.youtube.com/watch?v='+yid)+'" target="_blank" rel="noopener noreferrer" '
+      + 'aria-label="YouTube에서 영상 보기"><span>&#9654;</span></a>';
+  }
   if(p.head.t==='svg') return (DIAGRAM[p.head.k]||'')+(p.head.cap?'<span class="cap">'+esc(p.head.cap)+'</span>':'');
   /* 장식용 추상 이미지 — 실제 결과물 캡처가 아님을 캡션으로 명시 */
   if(p.head.t==='bg') return '<img '+(lazy?'loading="lazy" ':'')+'src="'+esc(p.head.src)+'" alt="" onerror="this.style.display=\'none\'">'
     +(p.head.cap?'<span class="cap">'+esc(p.head.cap)+'</span>':'');
   return '<div class="play"><span>&#43;</span></div>';
 }
-function renderCards(){
+function renderCards(scope){
+  scope=scope||'all';
   var g=document.getElementById('projGrid');
-  g.innerHTML=PROJECTS.map(function(p,i){
-    return '<article class="proj reveal" data-i="'+i+'" tabindex="0" role="button" aria-label="'+esc(p.title)+' 상세 보기">'
+  var list=PROJECTS.filter(function(p){return scope==='all'||projectScope(p)===scope;});
+  if(!list.length){g.innerHTML=emptyProjectHTML(scope);return;}
+  g.innerHTML=list.map(function(p){
+    var i=PROJECTS.indexOf(p);
+    return '<article class="proj reveal" data-i="'+i+'" data-id="'+esc(p.id||'')+'" tabindex="0" role="button" aria-label="'+esc(p.title)+' 상세 보기">'
       +'<div class="thumb">'+headInner(p,true)+'<span class="badge">자세히 &#8599;</span></div>'
-      +'<div class="body"><span class="org">'+esc(p.org)+'</span><h3>'+esc(p.title)+'</h3>'
+      +'<div class="body"><div><span class="org">'+esc(p.org)+'</span> <span class="scope">'+esc(scopeLabel(p))+'</span></div><h3>'+esc(p.title)+'</h3>'
       +'<p>'+esc(p.summary.split("\n")[0])+'</p>'
       +'<div class="row">'+p.skills.slice(0,4).map(function(s){return '<span class="t">'+esc(s)+'</span>';}).join('')+'</div></div></article>';
   }).join('');
 }
 var lastFocus=null;
-function openModal(i){
+function indexOfId(id){for(var k=0;k<PROJECTS.length;k++){if(PROJECTS[k].id===id)return k;}return -1;}
+function openModal(i,fromHistory){
   var p=PROJECTS[i], m=document.getElementById('modal');
+  if(!p) return;
+  /* 열린 모달에 고유 주소를 부여 — 개별 프로젝트 공유 가능 + 모바일 뒤로가기로 닫힘 */
+  if(!fromHistory && p.id){
+    try{
+      if(location.hash.indexOf('#p-')===0) history.replaceState({mp:p.id},'','#p-'+p.id);
+      else history.pushState({mp:p.id},'','#p-'+p.id);
+    }catch(e){}
+  }
   lastFocus=document.activeElement;
-  var head='<div class="mhead">'+headInner(p,false)
+  var head='<div class="mhead">'+headInner(p,false,true)
     +'<button class="mclose" id="mclose" aria-label="닫기">&#10005;</button>'
     +'<div class="htitle"><div class="o">'+esc(p.org)+'</div><h2 id="mtitle">'+esc(p.title)+'</h2></div></div>';
-  var meta='<div class="mmeta"><span><b>기간</b> '+esc(p.period)+'</span>'+(p.team&&p.team!=='—'?'<span><b>팀</b> '+esc(p.team)+'</span>':'')+'</div>';
+  var meta='<div class="mmeta"><span><b>구분</b> '+esc(scopeLabel(p))+'</span><span><b>기간</b> '+esc(p.period)+'</span>'+(p.team&&p.team!=='—'?'<span><b>팀</b> '+esc(p.team)+'</span>':'')+'</div>';
   var tags='<div class="mtags">'+p.skills.map(function(s){return '<span class="t">'+esc(s)+'</span>';}).join('')+'</div>';
   var sum='<div class="msum">'+esc(p.summary)+(p.note?'\n\n※ '+esc(p.note):'')+'</div>';
   var secs=p.sections.map(function(sec){return '<div class="msec"><h4>'+esc(sec.h)+'</h4><ul>'+sec.items.map(itemHTML).join('')+'</ul></div>';}).join('');
@@ -777,13 +1198,14 @@ function openModal(i){
   cl.onclick=closeModal; cl.focus();
   m.scrollTop=0; back.scrollTop=0;
 }
-function closeModal(){
+function closeModal(fromHistory){
   var back=document.getElementById('mback');
   if(!back.classList.contains('open')) return;
   back.classList.remove('open'); back.setAttribute('aria-hidden','true');
   document.body.classList.remove('noscroll');
   if(lastFocus&&lastFocus.focus) lastFocus.focus();
   lastFocus=null;
+  if(!fromHistory && location.hash.indexOf('#p-')===0){ try{history.back();}catch(e){} }
 }
 /* 모달 안에서 Tab 순환 (포커스가 뒤 페이지로 새지 않도록) */
 function trapTab(e){
@@ -798,12 +1220,46 @@ function trapTab(e){
 document.addEventListener('DOMContentLoaded',function(){
   renderCards();
   var g=document.getElementById('projGrid');
-  g.addEventListener('click',function(e){var c=e.target.closest('.proj');if(c)openModal(+c.dataset.i);});
-  g.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')){var c=e.target.closest('.proj');if(c){e.preventDefault();openModal(+c.dataset.i);}}});
+  document.querySelectorAll('.projfilter').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.projfilter').forEach(function(b){b.setAttribute('aria-pressed','false');});
+      btn.setAttribute('aria-pressed','true');
+      renderCards(btn.dataset.scope||'all');
+    });
+  });
+  /* 썸네일의 YouTube 링크 클릭은 모달을 열지 않고 그대로 통과시킨다 */
+  g.addEventListener('click',function(e){
+    if(e.target.closest('a')) return;
+    var c=e.target.closest('.proj'); if(c)openModal(+c.dataset.i);
+  });
+  g.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'&&e.key!==' ') return;
+    if(e.target.closest('a')) return;
+    var c=e.target.closest('.proj'); if(c){e.preventDefault();openModal(+c.dataset.i);}
+  });
   var back=document.getElementById('mback');
   back.setAttribute('aria-hidden','true');
   back.addEventListener('click',function(e){if(e.target===back)closeModal();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal(); trapTab(e);});
+
+  /* 뒤로가기/앞으로가기와 딥링크(#p-<id>) 처리 */
+  window.addEventListener('popstate',function(e){
+    var id=(e.state&&e.state.mp)||(location.hash.indexOf('#p-')===0?location.hash.slice(3):'');
+    var i=id?indexOfId(id):-1;
+    if(i>=0){ closeModal(true); openModal(i,true); } else { closeModal(true); }
+  });
+  if(location.hash.indexOf('#p-')===0){
+    var did=location.hash.slice(3), di=indexOfId(did);
+    if(di>=0){
+      /* 딥링크로 바로 들어온 경우: 해시 없는 기본 항목을 먼저 만들어 둬야
+         모달을 닫을 때(history.back) 사이트를 벗어나지 않는다 */
+      try{
+        history.replaceState({},'',location.pathname+location.search);
+        history.pushState({mp:did},'','#p-'+did);
+      }catch(e){}
+      openModal(di,true);
+    }
+  }
   /* 카드는 렌더 후 생성되므로 여기서 reveal 관찰을 붙인다 */
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
