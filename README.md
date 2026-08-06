@@ -11,7 +11,7 @@ CSS·JavaScript·SVG를 모두 문서 안에 인라인으로 넣었습니다.
 
 ```
 index.html    사이트 본체
-assets/       이미지/GIF 9개
+assets/       이미지/GIF 10개
 robots.txt
 ```
 
@@ -30,6 +30,7 @@ robots.txt
 |---|---|
 | 영상 썸네일 | 각 사 공식 YouTube 채널에 공개된 영상 (프로젝트 카드 + 기술 연혁 메달리온) |
 | 알고리즘 결과 | `assets/gauge-detect.jpg` — 게이지 검출 알고리즘의 출력. 계기 주변만 남기고 잘라낸 뒤 비네팅으로 배경을 눌러 현장·위치 단서를 제거함 (게이지 카드 · 모달 · 기술 연혁 메달리온에 공용) |
+| 멀티 QR 검출 결과 | `assets/multi-qrcode-detect.gif` — 테스트 영상에서 QR 테스트지 내부만 16:9로 크롭한 공개용 GIF. 송장·라벨 등 대외비 영역은 제외함 |
 | 개인 R&D 미디어 | `assets/lab-fleet-viewer3d.gif`, `assets/lab-robopolishsim.gif`, `assets/lab-lcc-3dgs.gif`, `assets/lab-sensus-oct.png` — private repo 내용을 설명하기 위한 합성 데모 GIF와 센서 시뮬레이션 결과 이미지 |
 | 개념 도식 | `index.html`의 `DIAGRAM` 객체와 기술 연혁 섹션에 직접 작성한 인라인 SVG |
 | 추상 배경 | 이미지 생성 모델로 만든 장식용 이미지 (해당 카드에 표기) |
