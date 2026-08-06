@@ -143,20 +143,6 @@ a.play:hover span,a.play:focus-visible span{background:rgba(0,0,0,.82);transform
 .t{font-family:var(--mono);font-size:.68rem;padding:3px 8px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
 .scope{font-family:var(--mono);font-size:.66rem;color:var(--accent-ink);background:var(--accent-soft);border-radius:6px;padding:3px 7px}
 
-/* engineering proof */
-.proofgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media (max-width:900px){.proofgrid{grid-template-columns:1fr 1fr}}
-@media (max-width:620px){.proofgrid{grid-template-columns:1fr}}
-.proof{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
-.proof .top{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
-.proof .num{font-family:var(--mono);font-size:.72rem;color:var(--accent);font-weight:700;background:var(--accent-soft);border-radius:7px;padding:2px 7px;line-height:1.6}
-.proof h3{font-size:1rem;line-height:1.35;font-weight:740;letter-spacing:-.01em}
-.proof dl{display:grid;grid-template-columns:42px 1fr;gap:6px 10px;margin:0}
-.proof dt{font-family:var(--mono);font-size:.68rem;color:var(--accent);font-weight:700}
-.proof dd{margin:0;color:var(--ink-2);font-size:.88rem}
-.proof dd b{color:var(--ink);font-weight:650}
-.proof .dom{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:.66rem;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:3px 7px}
-
 /* timeline */
 .tl{border-left:2px solid var(--line);margin-left:8px;padding-left:0}
 .job{position:relative;padding:0 0 34px 26px}
@@ -334,8 +320,8 @@ body.noscroll{overflow:hidden}
   :root{--bg:#fff;--surface:#fff;--surface-2:#f4f4f4;--line:#ccc;--ink:#000;--ink-2:#333;--muted:#666;--accent:#7d4c06;--accent-ink:#7d4c06;--shadow:none}
   .topbar,.tgl,.mback,.thumb,.badge,.techhint{display:none!important}
   section{padding:18px 0;break-inside:avoid}
-  .proj,.proof,.axcard,.lab,.job,.era{break-inside:avoid}
-  .projs,.proofgrid,.axgrid,.labs{grid-template-columns:1fr 1fr}
+  .proj,.axcard,.lab,.job,.era{break-inside:avoid}
+  .projs,.axgrid,.labs{grid-template-columns:1fr 1fr}
   .reveal{opacity:1!important;transform:none!important}
   .techwrap{overflow:visible}
   .techline{grid-auto-flow:row;grid-auto-columns:auto;min-width:0}
@@ -362,7 +348,6 @@ body.noscroll{overflow:hidden}
       <span class="navlinks">
         <a href="#tech">기술연혁</a>
         <a href="#projects">대표 프로젝트</a>
-        <a href="#proof">해결사례</a>
         <a href="#dev2026">AX/R&D</a>
         <a href="#labs">개인R&D</a>
         <a href="#career">경력</a>
@@ -546,73 +531,8 @@ body.noscroll{overflow:hidden}
   </noscript>
 </section>
 
-<section id="proof">
-  <div class="sec-head"><span class="idx">03</span><h2>문제 해결 하이라이트</h2><span class="note">문제 → 접근 → 결과</span></div>
-  <div class="proofgrid">
-    <article class="proof reveal">
-      <div class="top"><span class="num">01</span><h3>LiDAR SLAM 수직 드리프트 원인 규명</h3></div>
-      <dl>
-        <dt>문제</dt><dd>FAST-LIO2 맵 생성 중 고도(z)가 계속 흘러 층과 평면이 어긋남.</dd>
-        <dt>접근</dt><dd>실기 rosbag을 분석해 <b>센서 장착 tilt</b>를 원인으로 특정하고 보정 적용.</dd>
-        <dt>결과</dt><dd>장시간 매핑에서 층·평면이 어긋나던 현상을 <b>해소</b>하고, 재현 조건과 보정 절차를 팀 공용 튜닝 기준으로 문서화.</dd>
-      </dl>
-      <span class="dom">4족보행 로봇 자율주행 스택 · FAST-LIO2</span>
-    </article>
-
-    <article class="proof reveal">
-      <div class="top"><span class="num">02</span><h3>특징 부족 복도에서 SLAM 발산 억제</h3></div>
-      <dl>
-        <dt>문제</dt><dd>geometry가 부족한 긴 복도에서 LiDAR-관성 SLAM이 발산.</dd>
-        <dt>접근</dt><dd><b>degeneracy 게이트</b>로 위험 구간을 감지하고 leg-velocity와 ground-plane Z 제약을 제한적으로 융합.</dd>
-        <dt>결과</dt><dd>발산으로 맵이 깨지던 저특징 복도 구간에서도 <b>궤적을 유지한 채 주행</b>하도록 전환.</dd>
-      </dl>
-      <span class="dom">휴머노이드 SLAM · LIO-SAM</span>
-    </article>
-
-    <article class="proof reveal">
-      <div class="top"><span class="num">03</span><h3>로봇 3D 뷰어 포즈 텔레포트 제거</h3></div>
-      <dl>
-        <dt>문제</dt><dd>3D 콘솔에서 SLAM 포즈가 순간이동하고 z축으로 흔들려 운영 화면 신뢰도 저하.</dd>
-        <dt>접근</dt><dd>complementary pose filter로 포즈 스트림을 평활화하고 단일 층 시설에서는 z를 안정화.</dd>
-        <dt>결과</dt><dd><b>텔레포트·z wobble 제거</b>, 3DGS 위 로봇 운영 프리뷰 품질 개선.</dd>
-      </dl>
-      <span class="dom">로봇 플릿 운영 콘솔 · 3DGS 뷰어</span>
-    </article>
-
-    <article class="proof reveal">
-      <div class="top"><span class="num">04</span><h3>SLAM 재초기화 데드락 해결</h3></div>
-      <dl>
-        <dt>문제</dt><dd>SLAM 재초기화 시 static ID 충돌과 Map mutex 데드락으로 프리징 발생.</dd>
-        <dt>접근</dt><dd>전역 ID 관리와 reset 시퀀스를 정리하고 멀티스레드 잠금 경로를 분리.</dd>
-        <dt>결과</dt><dd><b>freezing 제거</b>, Windows/Android 크로스플랫폼 안정화.</dd>
-      </dl>
-      <span class="dom">ORB-SLAM2 Crossplatform</span>
-    </article>
-
-    <article class="proof reveal">
-      <div class="top"><span class="num">05</span><h3>Unity 네이티브 메모리 누수 차단</h3></div>
-      <dl>
-        <dt>문제</dt><dd>mesh GraphicsBuffer가 해제되지 않아 장시간 실행 시 native 메모리 누수.</dd>
-        <dt>접근</dt><dd>버퍼 생명주기와 Dispose 경로를 명확히 분리하고 공통 패키지 API에 반영.</dd>
-        <dt>결과</dt><dd>장시간 실행 시 계속 증가하던 <b>네이티브 메모리 점유 제거</b>, 공통 패키지 API에 반영해 Unity 팀 전체가 재사용.</dd>
-      </dl>
-      <span class="dom">Unity 공통 모듈 · 네이티브 브릿지</span>
-    </article>
-
-    <article class="proof reveal">
-      <div class="top"><span class="num">06</span><h3>코드 생성 파이프라인 실패 복구</h3></div>
-      <dl>
-        <dt>문제</dt><dd>AI가 만든 코드를 원본 저장소에서 직접 실행하면 실패 복구와 비용 추적이 어려움.</dd>
-        <dt>접근</dt><dd>격리 작업 디렉토리, TaskGraph DAG, 동시성 제어, 비용 추적, 자동 재시도 루프 설계.</dd>
-        <dt>결과</dt><dd><b>58개 테스트 통과</b> 기준으로 코드 생성·빌드·테스트 실행 파이프라인 정리.</dd>
-      </dl>
-      <span class="dom">코드 생성·빌드·테스트 실행 엔진</span>
-    </article>
-  </div>
-</section>
-
 <section id="dev2026">
-  <div class="sec-head"><span class="idx">04</span><h2>AX / R&D 이니셔티브</h2><span class="note">본 프로젝트 외 · 내부 자동화 / 개인 실험 플랫폼</span></div>
+  <div class="sec-head"><span class="idx">03</span><h2>AX / R&D 이니셔티브</h2><span class="note">본 프로젝트 외 · 내부 자동화 / 개인 실험 플랫폼</span></div>
   <p class="axlead">2026년에는 공식 과제와 별도로, 개발 생산성·AI 에이전트 자동화를 위한 <b>내부 AX 도구</b>와 로봇 자율주행을 깊게 파고들기 위한 <b>개인 R&D 플랫폼</b>을 병행했습니다. 납품형 대표 프로젝트가 아니라, 반복 작업을 줄이고 새로운 로봇/AI 워크플로를 검증하기 위한 기반 작업입니다.</p>
   <div class="axgrid">
     <article class="axcard reveal">
@@ -657,7 +577,7 @@ body.noscroll{overflow:hidden}
 </section>
 
 <section id="labs">
-  <div class="sec-head"><span class="idx">05</span><h2>개인 R&D / Private Labs</h2><span class="note">Private repo 중심 · GIF / 도식 / 결과로 요약</span></div>
+  <div class="sec-head"><span class="idx">04</span><h2>개인 R&D / Private Labs</h2><span class="note">Private repo 중심 · GIF / 도식 / 결과로 요약</span></div>
   <p class="labintro">개인 저장소는 대부분 private이라 링크보다 <b>문제 배경, 구현 구조, 검증 흔적</b> 중심으로 정리했습니다. 회사 프로젝트와 별도로, 관심 도메인을 직접 파고들며 만든 실험·도구·프로토타입입니다.</p>
   <div class="labs">
     <article class="lab reveal">
@@ -760,7 +680,7 @@ body.noscroll{overflow:hidden}
 </section>
 
 <section id="career">
-  <div class="sec-head"><span class="idx">06</span><h2>경력</h2><span class="note">2016 → 현재 · 10년</span></div>
+  <div class="sec-head"><span class="idx">05</span><h2>경력</h2><span class="note">2016 → 현재 · 10년</span></div>
   <div class="tl">
 
     <div class="job reveal">
@@ -813,7 +733,7 @@ body.noscroll{overflow:hidden}
 </section>
 
 <section id="edu">
-  <div class="sec-head"><span class="idx">07</span><h2>기타</h2></div>
+  <div class="sec-head"><span class="idx">06</span><h2>기타</h2></div>
   <div class="two">
     <div class="panel reveal">
       <h3>학력</h3>
@@ -832,7 +752,7 @@ body.noscroll{overflow:hidden}
 </section>
 
 <section id="links">
-  <div class="sec-head"><span class="idx">08</span><h2>링크</h2></div>
+  <div class="sec-head"><span class="idx">07</span><h2>링크</h2></div>
   <div class="links">
     <a class="linkbtn" href="mailto:choo9959@gmail.com">Email <span class="m">choo9959@gmail.com</span></a>
     <a class="linkbtn" href="https://robotics.virnect.com/products/humanoid-simulation" target="_blank" rel="noopener">Virnect Robotics <span class="m">↗</span></a>
