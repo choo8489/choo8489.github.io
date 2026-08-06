@@ -513,6 +513,7 @@ body.noscroll{overflow:hidden}
     <div class="nojs">
       <p>※ JavaScript가 꺼져 있어 프로젝트 카드 대신 목록으로 표시합니다.</p>
       <ul>
+        <li><b>POSCO 콘크리트 다짐 커버리지 추적</b> — 버넥트 / POSCO PoC <span>2026.04 – 2026.07</span></li>
         <li><b>로봇 강화학습 시뮬레이터 — 과제 수행부터 제품화까지</b> — 버넥트 / KETI <span>2025.01 – 2026.06</span></li>
         <li><b>메시 경량화 풀스택 — Rust 코어부터 엔진 통합까지</b> — 버넥트 <span>2026.02 – 2026.06</span></li>
         <li><b>건축유산 H-BIM 모니터링 · 원형복구</b> — 국가유산청 / 주관 ETRI <span>2024.03 – 2026.03</span></li>
@@ -688,6 +689,7 @@ body.noscroll{overflow:hidden}
       <div class="when">2023.10 ~ 현재</div>
       <h3>버넥트 (Virnect) <span class="role">피지컬 AI팀 · 책임연구원</span></h3>
       <ul class="plist">
+        <li><div class="pt">POSCO 콘크리트 다짐 커버리지 추적 <span class="yr">PoC · 2026.04–07</span></div><div class="pd">현장 CCTV 한 대로 콘크리트 진동봉 작업자의 삽입점과 셀 단위 dwell을 추적하는 컴퓨터비전 파이프라인. NVR 영상 자동 수집, SAM2 작업자 추적, RF-DETR 봉 검출, RTMPose/PoseC3D 작업판정, homography 기반 커버리지 히트맵 구조를 설계·구현.</div></li>
         <li><div class="pt">로봇 강화학습 시뮬레이터 <span class="yr">KETI 과제 → 사내 제품 · 2025.01–2026.06</span></div><div class="pd">강화학습 기반 휴머노이드 로봇 조작 AI(컵 파지·목표 이동 정책)를 KETI 과제로 구현하고, 이후 휴머노이드 버추얼 커미셔닝 시뮬레이터의 에디터 프레임워크와 노드 그래프 기반 ML-Agents 저작 모듈을 갖춘 사내 제품으로 이어감.</div><div style="margin-top:6px"><a class="link" href="https://robotics.virnect.com/products/humanoid-simulation" target="_blank" rel="noopener">제품 페이지 ↗</a> <a class="link" href="https://www.youtube.com/watch?v=Lgl9JTBiamU" target="_blank" rel="noopener">데모 영상 ▶</a></div></li>
         <li><div class="pt">메시 경량화 풀스택 — Rust 코어부터 엔진 통합까지 <span class="yr">사내 R&D · 2026.02–06</span></div><div class="pd">QEM 기반 경량화 엔진(Rust) 직접 구현, 다포맷 변환 CLI/GUI 도구, Unity 네이티브 브릿지(NativeDecimator)까지 하나의 축으로 제품화.</div></li>
         <li><div class="pt">SLAM 기반 측위 시스템 <span class="yr">과기정통부 스마트제조혁신 · 2025.01–12</span></div><div class="pd">단안 카메라 기반 SLAM 알고리즘, 실내 맵 생성 및 작업자 위치 추정(Localization) 기술 개발. Industrial XR 프레임워크 과제의 SLAM 파트 담당.</div></li>
@@ -896,6 +898,18 @@ const DIAGRAM = {
     +'<rect x="166" y="50" width="96" height="96" rx="3" stroke="'+A+'" stroke-dasharray="5 4" stroke-width="1.6"/>'
     +'<text x="36" y="42" font-family="monospace" font-size="9" fill="'+A+'">barcode</text>'
     +'<text x="166" y="46" font-family="monospace" font-size="9" fill="'+A+'">qr</text>'),
+  /* 콘크리트 다짐 커버리지: CCTV → 추적 → 그리드 히트맵 */
+  compaction: SV('<rect x="34" y="36" width="74" height="50" rx="5" stroke="currentColor" stroke-opacity=".45" stroke-width="2"/>'
+    +'<path d="M108 58l38 16M108 72l38 30" stroke="currentColor" stroke-opacity=".25" stroke-width="2"/>'
+    +'<circle cx="72" cy="61" r="9" stroke="'+A+'" stroke-width="2"/><path d="M66 61h12M72 55v12" stroke="'+A+'" stroke-width="2"/>'
+    +'<path d="M150 44c24 8 34 26 31 48s-18 36-38 45" stroke="currentColor" stroke-opacity=".35" stroke-width="2" stroke-dasharray="5 5"/>'
+    +'<path d="M178 76c24-6 42 0 56 16" stroke="'+A+'" stroke-width="2"/>'
+    +'<circle cx="184" cy="76" r="4" fill="'+A+'"/><circle cx="230" cy="92" r="4" fill="'+A+'"/>'
+    +'<g stroke="currentColor" stroke-opacity=".28" stroke-width="1.4"><path d="M190 42v102M214 42v102M238 42v102M262 42v102M178 54h96M178 78h96M178 102h96M178 126h96"/></g>'
+    +'<g fill="'+A+'" fill-opacity=".28"><rect x="214" y="78" width="24" height="24"/><rect x="238" y="78" width="24" height="24"/><rect x="238" y="102" width="24" height="24"/></g>'
+    +'<rect x="178" y="42" width="96" height="102" rx="3" stroke="'+A+'" stroke-opacity=".65" stroke-width="1.8"/>'
+    +'<text x="34" y="108" font-family="monospace" font-size="9" fill="'+A+'">CCTV/NVR</text>'
+    +'<text x="178" y="158" font-family="monospace" font-size="9" fill="'+A+'">coverage heatmap</text>'),
   /* 매장 앱: 태블릿 카운터 + 모바일 */
   app: SV('<rect x="30" y="30" width="150" height="112" rx="7" stroke="currentColor" stroke-opacity=".5" stroke-width="2"/>'
     +'<path d="M30 52h150" stroke="'+A+'" stroke-width="2"/>'
@@ -944,6 +958,17 @@ const DIAGRAM = {
 /* 기간 표기 규칙: 종료된 과제는 'YYYY.MM – YYYY.MM', 종료일 미확정은 'YYYY.MM ~'
    정렬 규칙: 종료월 기준 최신순 (종료일 미확정은 해당 연도 그룹 끝) */
 const PROJECTS = [
+ {id:'posco-compaction', end:'2026.07', org:'버넥트 / POSCO PoC · 2026', title:'콘크리트 다짐 커버리지 추적 — CCTV 기반 CV 파이프라인', period:'2026.04 – 2026.07', team:'주개발',
+  skills:['Python','RF-DETR','SAM2','RTMPose','PoseC3D','Homography','FastAPI'], head:{t:'svg',k:'compaction',cap:'공개용 개념 도식'},
+  summary:'현장 CCTV 한 대로 콘크리트 진동봉 작업의 면(面) 커버리지를 추적하는 컴퓨터비전 PoC입니다. NVR 영상 수집부터 작업자 라벨링, 봉 검출 모델 학습, 작업판정 게이트, 삽입점 추적, 셀 단위 커버리지 히트맵까지 이어지는 오프라인 검증 파이프라인을 구축했습니다.',
+  sections:[
+   {h:'목표', items:['작업자가 든 진동봉 끝이 슬래브의 어느 셀을 얼마나 다졌는지 누적','셀 단위 dwell 기반으로 다짐 완료/부분/미다짐 영역을 QA 리포트로 전환','추가 IoT 없이 고정 CCTV 영상만으로 현장 품질 점검 가능성 검증']},
+   {h:'NVR 수집·라벨링 워크플로', items:['emstone NVR HTTP API 기반 타설일 영상 자동 다운로드 스크립트 구현','다운로드 resume/skip, chunk 단위 재시도, ffprobe/cv2 sanity check로 원본 영상 무결성 검증','FastAPI 기반 web_builder로 작업자 선택, 라벨링, 데이터셋 빌드, 검수 흐름 구성','사이트/자격증명/원본 영상은 gitignore 처리하고, 데이터 provenance 문서로 영상→라벨→COCO 흐름 추적']},
+   {h:'커버리지 추적 파이프라인', items:['SAM2로 작업자 추적 후 worker crop 생성','RF-DETR 1-class 모델로 진동봉/삽입점 후보 검출','RTMPose 17관절 + PoseC3D로 compacting/moving/idle 작업판정 게이트 구성','action-gated Kalman과 homography로 tip 좌표를 바닥 그리드에 투영해 커버리지 히트맵 생성']},
+   {h:'검증 결과', items:['RF-DETR v3 round2 기준 mAP@50 0.874, 5fps 검출 97%, 1fps 검출 91% 기록','PoseC3D 작업판정은 LOWO 기준 AUC 0.84 수준까지 검증','RF-DETR 단독으로 놓치는 가림/불검출 구간을 variance·SAM2·Kalman 융합으로 보완해 봉 위치 복원율 90% 수준까지 확인','오프라인 검증 완료 후, 런타임/스트리밍 통합을 다음 단계로 정리']},
+  ], links:[],
+  note:'현장 CCTV 이미지, 서버 IP, NVR 경로, 원본 영상은 비공개입니다. 포트폴리오에는 공개용 개념 도식과 기술 구조만 사용했습니다.'},
+
  {id:'rl-studio', end:'2026.06', org:'버넥트 · 2025–2026', title:'로봇 강화학습 시뮬레이터 — 과제 수행부터 제품화까지', period:'2025.01 – 2026.06', team:'2025 개발자 3 · PM 1 · 디자인 1 / 2026 주개발',
   skills:['ML-Agents','Unity 6','C#','C++','Python','ONNX Runtime','URDF','UI Toolkit'], head:{t:'yt',id:'Lgl9JTBiamU',mfit:'--z:2.1;--zx:50%;--zy:20%'},
   summary:'Studio 안에서 로봇과 환경을 구성해 실제 로봇 조작과 유사한 강화학습 시뮬레이션을 수행하는 시스템.\n2025년 KETI 과제로 컵 파지·목표 이동 정책 학습을 구현했고, 2026년에는 자동화 공정용 휴머노이드 버추얼 커미셔닝 시뮬레이터와 노드 그래프 기반 RL 저작 환경을 갖춘 사내 제품으로 이어 붙였습니다.',
