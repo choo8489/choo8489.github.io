@@ -515,8 +515,8 @@ body.noscroll{overflow:hidden}
 </section>
 
 <section id="projects">
-  <div class="sec-head"><span class="idx">02</span><h2>대표 프로젝트</h2><span class="note">회사 / 외부 의뢰 / 개인 R&D 구분 · 최신순</span></div>
-  <p class="projlead">재직 중 수행한 고객·국가R&D·사내 제품화 작업, 재직 경력 밖의 외부 의뢰, 그리고 개인 R&D 프로젝트를 분리해 볼 수 있도록 정리했습니다.</p>
+  <div class="sec-head"><span class="idx">02</span><h2>대표 프로젝트</h2><span class="note">회사 / 외부 의뢰 · 최신순</span></div>
+  <p class="projlead">재직 중 수행한 고객·국가R&D·사내 제품화 작업과, 재직 경력 밖의 외부 의뢰를 분리해 볼 수 있도록 정리했습니다. 개인 R&D는 별도 섹션에서 private lab 형태로 다룹니다.</p>
   <div class="projfilters" aria-label="프로젝트 분류">
     <button class="projfilter" type="button" data-scope="all" aria-pressed="true">전체</button>
     <button class="projfilter" type="button" data-scope="company" aria-pressed="false">회사</button>
@@ -527,7 +527,6 @@ body.noscroll{overflow:hidden}
     <div class="nojs">
       <p>※ JavaScript가 꺼져 있어 프로젝트 카드 대신 목록으로 표시합니다.</p>
       <ul>
-        <li><b>로봇 자율주행·시뮬레이션 통합 플랫폼</b> — 버넥트 <span>2026.03 – 2026.07</span></li>
         <li><b>로봇 강화학습 시뮬레이터 — 과제 수행부터 제품화까지</b> — 버넥트 / KETI <span>2025.01 – 2026.06</span></li>
         <li><b>메시 경량화 풀스택 — Rust 코어부터 엔진 통합까지</b> — 버넥트 <span>2026.02 – 2026.06</span></li>
         <li><b>건축유산 H-BIM 모니터링 · 원형복구</b> — 국가유산청 / 주관 ETRI <span>2024.03 – 2026.03</span></li>
@@ -613,8 +612,8 @@ body.noscroll{overflow:hidden}
 </section>
 
 <section id="dev2026">
-  <div class="sec-head"><span class="idx">04</span><h2>AX / R&D 이니셔티브</h2><span class="note">본 프로젝트 외 · 내부 자동화 / 실험 플랫폼</span></div>
-  <p class="axlead">2026년에는 공식 과제와 별도로, 사내 개발 생산성·로봇 R&D·AI 에이전트 자동화를 위한 <b>내부 AX 도구와 실험 플랫폼</b>을 직접 기획하고 구현했습니다. 납품형 대표 프로젝트가 아니라, 팀이 반복 작업을 줄이고 새로운 로봇/AI 워크플로를 검증하기 위한 기반 작업입니다.</p>
+  <div class="sec-head"><span class="idx">04</span><h2>AX / R&D 이니셔티브</h2><span class="note">본 프로젝트 외 · 내부 자동화 / 개인 실험 플랫폼</span></div>
+  <p class="axlead">2026년에는 공식 과제와 별도로, 개발 생산성·AI 에이전트 자동화를 위한 <b>내부 AX 도구</b>와 로봇 자율주행을 깊게 파고들기 위한 <b>개인 R&D 플랫폼</b>을 병행했습니다. 납품형 대표 프로젝트가 아니라, 반복 작업을 줄이고 새로운 로봇/AI 워크플로를 검증하기 위한 기반 작업입니다.</p>
   <div class="axgrid">
     <article class="axcard reveal">
       <div class="kicker">AI Agent Runtime</div>
@@ -630,12 +629,12 @@ body.noscroll{overflow:hidden}
     </article>
 
     <article class="axcard reveal">
-      <div class="kicker">Robot R&D Toolchain</div>
-      <h3>로봇 시뮬레이션·SLAM·운영 콘솔</h3>
-      <p>자율주행 실험을 반복 가능하게 만들기 위해 ROS2 기반 시뮬레이션, SLAM 검증, 3DGS 기반 플릿 콘솔을 연결했습니다.</p>
-      <div class="decision"><b>판단</b>개별 데모가 아니라 시뮬레이션 → 위치추정 → 운영 콘솔로 이어지는 실험 루프를 우선 구축</div>
+      <div class="kicker">Private Robot R&D</div>
+      <h3>RSPA System — 시뮬레이션·SLAM·운영 콘솔</h3>
+      <p>개인 R&D로 자율주행 실험을 반복 가능하게 만들기 위해 ROS2 기반 시뮬레이션, SLAM 검증, 3DGS 기반 플릿 콘솔을 연결했습니다.</p>
+      <div class="decision"><b>판단</b>개별 데모가 아니라 시뮬레이션 → 위치추정 → 운영 콘솔로 이어지는 개인 실험 루프를 우선 구축</div>
       <ul class="axlist">
-        <li>자율주행 통합 플랫폼: Isaac Sim/Newton 시뮬, SLAM, 강화학습을 하나의 ROS2 스택으로 통합</li>
+        <li>RSPA 시스템: Isaac Sim/Newton 시뮬, SLAM, 강화학습을 하나의 ROS2 스택으로 통합</li>
         <li>플릿 운영 콘솔: WebSocket 텔레메트리와 three.js/3DGS 기반 멀티로봇 운영 화면</li>
         <li>스택 프로비저닝: 로봇 스택 구성·배포를 desired-state 방식으로 도구화</li>
       </ul>
@@ -679,11 +678,11 @@ body.noscroll{overflow:hidden}
       <div class="labmedia"><img loading="lazy" src="assets/lab-fleet-viewer3d.gif" alt=""></div>
       <div class="labbody">
         <div class="labmeta"><span class="labtag">Robot Ops Console</span><span class="labstate">Private</span></div>
-        <h3>RSPA Ecosystem — 스택 조립·검증·관제</h3>
-        <p>자율주행 스택을 조립하고, 시뮬레이션에서 검증한 뒤, 멀티로봇 운영 콘솔로 관제하는 실험 생태계.</p>
+        <h3>RSPA System — 자율주행·시뮬·운영 통합</h3>
+        <p>개인적으로 구축 중인 로봇 R&D 시스템. 자율주행 스택을 조립하고, 시뮬레이션에서 검증한 뒤, 멀티로봇 운영 콘솔로 관제하는 실험 생태계.</p>
         <dl>
-          <dt>구현</dt><dd>rspa · fleet-console · stack-store 연동</dd>
-          <dt>증거</dt><dd>Foxglove WebSocket 프로토콜, 합성 4로봇 fleet 데모 GIF</dd>
+          <dt>구현</dt><dd>rspa · fleet-console · stack-store, ROS2, SLAM/Localization, 3DGS 뷰어 연동</dd>
+          <dt>증거</dt><dd>Foxglove WebSocket 프로토콜, 합성 4로봇 fleet 데모 GIF, private repo 작업 기록</dd>
         </dl>
         <div class="lablinks"><span>Private repo</span><span>3D viewer GIF</span></div>
       </div>
@@ -768,7 +767,6 @@ body.noscroll{overflow:hidden}
       <div class="when">2023.10 ~ 현재</div>
       <h3>버넥트 (Virnect) <span class="role">피지컬 AI팀 · 책임연구원</span></h3>
       <ul class="plist">
-        <li><div class="pt">로봇 자율주행·시뮬레이션 통합 플랫폼 <span class="yr">사내 R&D · 2026.03–07</span></div><div class="pd">Isaac Sim/Newton 시뮬레이션 → SLAM 로컬라이제이션 → 강화학습을 하나의 ROS2 스택으로 통합. map_relocalizer·loop-closure pose graph, 3DGS→PCD 파이프라인, Visual-RL 학습 환경 개발.</div></li>
         <li><div class="pt">로봇 강화학습 시뮬레이터 <span class="yr">KETI 과제 → 사내 제품 · 2025.01–2026.06</span></div><div class="pd">강화학습 기반 휴머노이드 로봇 조작 AI(컵 파지·목표 이동 정책)를 KETI 과제로 구현하고, 이후 휴머노이드 버추얼 커미셔닝 시뮬레이터의 에디터 프레임워크와 노드 그래프 기반 ML-Agents 저작 모듈을 갖춘 사내 제품으로 이어감.</div><div style="margin-top:6px"><a class="link" href="https://robotics.virnect.com/products/humanoid-simulation" target="_blank" rel="noopener">제품 페이지 ↗</a> <a class="link" href="https://www.youtube.com/watch?v=Lgl9JTBiamU" target="_blank" rel="noopener">데모 영상 ▶</a></div></li>
         <li><div class="pt">메시 경량화 풀스택 — Rust 코어부터 엔진 통합까지 <span class="yr">사내 R&D · 2026.02–06</span></div><div class="pd">QEM 기반 경량화 엔진(Rust) 직접 구현, 다포맷 변환 CLI/GUI 도구, Unity 네이티브 브릿지(NativeDecimator)까지 하나의 축으로 제품화.</div></li>
         <li><div class="pt">SLAM 기반 측위 시스템 <span class="yr">과기정통부 스마트제조혁신 · 2025.01–12</span></div><div class="pd">단안 카메라 기반 SLAM 알고리즘, 실내 맵 생성 및 작업자 위치 추정(Localization) 기술 개발. Industrial XR 프레임워크 과제의 SLAM 파트 담당.</div></li>
@@ -985,14 +983,6 @@ const DIAGRAM = {
 /* 기간 표기 규칙: 종료된 과제는 'YYYY.MM – YYYY.MM', 종료일 미확정은 'YYYY.MM ~'
    정렬 규칙: 종료월 기준 최신순 (종료일 미확정은 해당 연도 그룹 끝) */
 const PROJECTS = [
- {id:'robot-nav', end:'2026.07', org:'버넥트 · 2026', title:'로봇 자율주행·시뮬레이션 통합 플랫폼', period:'2026.03 – 2026.07', team:'주개발',
-  skills:['ROS2','Isaac Sim','Newton','3DGS','강화학습','Python'], head:{t:'svg',k:'nav',cap:'개념 도식'},
-  summary:'로봇의 시뮬레이션 → SLAM/로컬라이제이션 → 강화학습을 하나의 ROS2 스택으로 통합한 사내 로봇 R&D 핵심 플랫폼. 이후의 플릿 운영 콘솔과 스택 프로비저닝 도구가 모두 이 규약을 기준으로 동작합니다.',
-  sections:[
-   {h:'담당 기능', items:[{t:'시뮬레이션 환경', s:['Isaac Sim USD 기반 오피스/창고/facility 환경 구축','Newton 물리엔진 통합, 휴머노이드·4족보행 solver 및 contact 처리']},{t:'로컬라이제이션', s:['map_relocalizer + loop-closure pose graph 모듈 개발','SLAM degeneracy 구간 대응']},{t:'3DGS 파이프라인 — 3D Gaussian Splatting PLY를 PCD로 변환'},{t:'Visual-RL', s:['Newton 네이티브 3DGS 시뮬 위에서 vectorized physics 기반 학습','goal-distance 커리큘럼, heading reward shaping']},'로봇 프로파일 기반 센서(LiDAR FOV/range) 파라미터화','아키텍처 리뷰 문서화 — 구조적 부채 감사·우선순위 정리']},
-   {h:'성과', items:['시뮬레이션 → 로컬라이제이션 → 강화학습을 단일 ROS2 파이프라인으로 연결해, 흩어져 있던 실험을 재현 가능한 루프로 정리','이후 플릿 운영 콘솔·스택 프로비저닝 도구가 이 규약을 기준으로 동작하도록 사내 표준 역할 수행']},
-  ], links:[]},
-
  {id:'rl-studio', end:'2026.06', org:'버넥트 · 2025–2026', title:'로봇 강화학습 시뮬레이터 — 과제 수행부터 제품화까지', period:'2025.01 – 2026.06', team:'2025 개발자 3 · PM 1 · 디자인 1 / 2026 주개발',
   skills:['ML-Agents','Unity 6','C#','C++','Python','ONNX Runtime','URDF','UI Toolkit'], head:{t:'yt',id:'Lgl9JTBiamU',mfit:'--z:2.1;--zx:50%;--zy:20%'},
   summary:'Studio 안에서 로봇과 환경을 구성해 실제 로봇 조작과 유사한 강화학습 시뮬레이션을 수행하는 시스템.\n2025년 KETI 과제로 컵 파지·목표 이동 정책 학습을 구현했고, 2026년에는 자동화 공정용 휴머노이드 버추얼 커미셔닝 시뮬레이터와 노드 그래프 기반 RL 저작 환경을 갖춘 사내 제품으로 이어 붙였습니다.',
@@ -1079,13 +1069,13 @@ const PROJECTS = [
   ], links:[{l:'FXMirror AvatarMode (YouTube)',u:'https://www.youtube.com/watch?v=zlcrM8rxalM'},{l:'FXMirror Smart Shopping (YouTube)',u:'https://www.youtube.com/watch?v=TEPGgl686-w'}]},
 
  {id:'narang', end:'2022.08', org:'에프엑스기어 · 2021–2022', title:'Narang — 실시간 렌더링 디지털 휴먼', period:'2021.02 – 2022.08', team:'—',
-  skills:['C++','NDK','OpenGL','Compute Shader','Unity'], head:{t:'bg',src:'assets/card-lightfield.jpg',cap:'AI 생성 이미지 · 실제 화면 아님'},
+  skills:['C++','NDK','OpenGL','Compute Shader','Unity'], head:{t:'bg',src:'assets/card-lightfield.jpg',cap:'기술 개념 이미지 · 실제 앱 화면 아님'},
   summary:'디지털 휴먼 기반 실시간 인터랙티브 경험 플랫폼. 시점 기반 광원효과와 LightField Rendering으로 사실적인 아바타를 구현하고, 사용자 움직임·음성을 인식해 시선·동작을 맞춤. (스터디/AR/PhotoCard 3가지 모드)',
   sections:[
    {h:'담당 기능', items:['씬베이스 구조 설계 + UniRx MVP 패턴으로 모든 UI 설계','Addressable Asset System으로 필요한 리소스만 업데이트','LightField Rendering 알고리즘 라이브러리화(C++ → .so)','OpenGL 코드를 Unity Shader로 전면 변환','120개 넘는 Texture를 단일 Shader에서 블렌딩','10만개 넘는 Vertex sequence를 매 프레임 Compute Shader로 처리','C++·C# 간 대용량 데이터 이동에 Pin Memory 사용','애니메이션 타임/버텍스 시퀀스 싱크를 Script에서 제어','머리만 회전하거나 유저를 쳐다보는 EyeGazing 로직','v0.5.2까지 앱 업데이트·배포']},
    {h:'성과', items:['Addressable Asset 관리 설계','OpenGL→Unity Shader 변환으로 그래픽 파이프라인·셰이더 이해','Android/iOS 전용 C++ 라이브러리 빌드 방법 습득','Compute Shader로 GPU 활용, Pin Memory·C# 마샬링 이해']},
-  ], links:[{l:'서비스 출시 기사 (데이터넷)',u:'http://www.datanet.co.kr/news/articleView.html?idxno=171596'}],
-  note:'서비스 종료로 공식 사이트·홍보영상은 현재 접속되지 않습니다.'},
+  ], links:[{l:'Reference · 서비스 출시 기사 (데이터넷)',u:'http://www.datanet.co.kr/news/articleView.html?idxno=171596'},{l:'Reference · 디지털 휴먼 기사 (IT동아)',u:'https://it.donga.com/102309/'},{l:'Reference · APKPure 앱 소개',u:'https://apkpure.net/narang/com.fxgear.Narang2'}],
+  note:'서비스 종료로 공식 사이트·홍보영상은 현재 접속되지 않습니다. 앱 스크린샷과 기사 이미지는 권리 범위가 불명확해 직접 재사용하지 않고, 공개 페이지 링크만 참조합니다.'},
 
  {id:'lott', end:'2022.12', org:'에프엑스기어 / 소프텍코퍼레이션 · 2022', title:'LOTT 헬스버스 — 의료 메타버스', period:'2022.08 – 2022.12', team:'—',
   skills:['Unity','UniRx','Zenject','UniTask'], head:{t:'bg',src:'assets/card-pulse.jpg',cap:'AI 생성 이미지 · 실제 화면 아님'},
