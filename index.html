@@ -206,6 +206,10 @@ footer .row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;a
 .modal .msec li{color:var(--ink-2);font-size:.92rem}
 .modal .msec li ul{margin:6px 0 0;gap:4px}
 .modal .msec li ul li{color:var(--muted);font-size:.87rem}
+.modal .mgal{display:flex;flex-direction:column;gap:16px}
+.modal .mgal figure{margin:0}
+.modal .mgal img{width:100%;display:block;border:1px solid var(--line);border-radius:10px;background:#fff}
+.modal .mgal figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:7px;line-height:1.5}
 .modal .mlinks{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .modal .mlinks a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 15px;color:var(--ink);font-weight:600;font-size:.86rem}
 .modal .mlinks a:hover{border-color:var(--accent);color:var(--accent-ink)}
@@ -231,6 +235,8 @@ body.noscroll{overflow:hidden}
 /* ---- 개인 R&D / Private Labs ---- */
 .labintro{color:var(--ink-2);font-size:.95rem;margin:0 0 20px;max-width:76ch}
 .labintro b{color:var(--ink);font-weight:650}
+.lab[data-mid]{cursor:pointer}
+.lab[data-mid]:hover .labopen,.lab[data-mid]:focus-visible .labopen{border-color:var(--accent);color:var(--accent-ink)}
 .labmore{color:var(--muted);font-size:.85rem;margin:16px 0 0;max-width:76ch}
 .labmore a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
 .labmore a:hover{color:var(--accent-ink);border-color:var(--accent)}
@@ -600,7 +606,7 @@ body.noscroll{overflow:hidden}
       </div>
     </article>
 
-    <article class="lab reveal">
+    <article class="lab reveal" data-mid="rspa-system" tabindex="0" role="button" aria-label="RSPA System 상세 보기">
       <div class="labmedia"><img loading="lazy" src="assets/lab-fleet-viewer3d.gif" alt=""></div>
       <div class="labbody">
         <div class="labmeta"><span class="labtag">Robot Ops Platform</span><span class="labstate">Private</span></div>
@@ -610,7 +616,7 @@ body.noscroll{overflow:hidden}
           <dt>구현</dt><dd>rspa(ROS2 스택·레지스트리→다이어그램 생성) · fleet-console(Foxglove WS + three.js/3DGS 관제) · stack-store(desired-state 스택 조립 UI)</dd>
           <dt>증거</dt><dd>합성 4로봇 fleet 데모 GIF, 목업 브리지·API로 재현 가능한 스크린샷, private repo 작업 기록</dd>
         </dl>
-        <div class="lablinks"><span>Private repos</span><span>3D viewer GIF</span></div>
+        <div class="lablinks"><span>Private repos</span><span class="labopen">화면 · 도식 자세히 &#43;</span></div>
       </div>
     </article>
 
@@ -976,6 +982,36 @@ const DIAGRAM = {
 /* 기간 표기 규칙: 종료된 과제는 'YYYY.MM – YYYY.MM', 종료일 미확정은 'YYYY.MM ~'
    정렬 규칙: 종료월 기준 최신순 (종료일 미확정은 해당 연도 그룹 끝) */
 const PROJECTS = [
+ /* labOnly: 대표 프로젝트 '전체' 그리드에는 숨기고, '개인R&D' 필터와 Labs 카드 클릭으로만 연다 */
+ {id:'rspa-system', end:'', org:'개인 R&D', title:'RSPA System — 자율주행 스택 조립·검증·관제 플랫폼', period:'진행 중', team:'개인 프로젝트', scope:'personal', labOnly:true,
+  skills:['ROS2','Newton 물리','3DGS · gsplat','LIO-SAM · FAST-LIO2 · Point-LIO','React','three.js','Foxglove WS'],
+  head:{t:'bg',src:'assets/lab-fleet-viewer3d.gif',cap:'3DGS 시설 4로봇 fleet — 합성 데이터 데모'},
+  summary:'개인 로봇 R&D 플랫폼을 코어(rspa)·조립도구(stack-store)·관제콘솔(fleet-console) 세 저장소로 나눠 구축했습니다.\n핵심 설계는 계약 중심 — 레이어는 다른 레이어가 아니라 인터페이스에 의존하고, 같은 인터페이스를 제공하는 레이어로 갈아끼울 수 있습니다. 자율주행 brain(loc/plan/behavior)은 sim↔real 동일하고 body 레이어만 교체됩니다.',
+  sections:[
+   {h:'구성 — 세 축', items:[
+    'rspa (코어 허브) — SLAM→planning→behavior→monitor ROS2 스택, 레이어 레지스트리 + 로봇 프로파일, Newton 물리 + 3DGS 렌더 + GPU lidar 시뮬레이션',
+    'stack-store (조립) — 카테고리별 레이어를 골라 인터페이스 계약을 실시간 검증하며 스택 매니페스트를 생성·적용하는 웹 도구. yaml을 손으로 쓰지 않는다',
+    'fleet-console (관제) — Foxglove WebSocket 프로토콜을 직접 말하는 멀티로봇 콘솔. 3D 뷰어(three.js/3DGS), fleet 대시보드, 토픽·서비스 디버깅, teleop']},
+   {h:'설계 판단', items:[
+    '레이어는 레이어에 의존하지 않는다 — 인터페이스에 의존한다. 그래서 SLAM을 lio_sam ↔ fast_lio ↔ point_lio로 교체해도 나머지 스택이 그대로 성립',
+    'Same brain, swapped body — 스택 target을 both로 두면 동일 brain이 Newton 시뮬과 실 로봇(go2 · anymal · g1 · atom01 프로파일)에 같이 실린다',
+    '다이어그램은 손으로 그리지 않는다 — 레지스트리 yaml에서 생성하고, 계약과 어긋나면 --check가 잡는다',
+    '스택 적용은 desired-state 게시·수렴 방식 — 적용 이력이 남고 클릭 한 번으로 롤백']},
+   {h:'검증 흔적', items:[
+    '레지스트리: 레이어 13종 · 로봇 프로파일 7종, 계약 그래프·매트릭스는 yaml에서 자동 생성',
+    'SLAM 검증 배치 리포트를 시나리오별로 문서 축적 (warehouse n100, 동적 장애물 crossing/lane-sharing 등)',
+    '웹 도구 둘은 목업 브리지·목업 stack API로 백엔드 없이 재현 가능 — 아래 화면이 그 캡처']},
+  ],
+  media:[
+   {src:'assets/lab-rspa-ecosystem.png',cap:'생태계 구조 — stack-store로 조립한 스택이 rspa 레지스트리에 적용되고, 같은 brain이 sim/real에 실려 fleet-console로 관제된다 (README mermaid 렌더)'},
+   {src:'assets/lab-rspa-compose.png',cap:'stack-store — 솔루션/레이어를 골라 조립하면 인터페이스 계약을 실시간 검증하고 매니페스트를 생성 (목업 데이터)'},
+   {src:'assets/lab-rspa-apply-diff.png',cap:'stack-store — 적용 전 diff 확인, dry-run 검증, 적용 이력에서 롤백 (목업 데이터)'},
+   {src:'assets/lab-rspa-contracts.png',cap:'rspa — 레지스트리 yaml에서 자동 생성한 인터페이스 계약 그래프. 실선 = 제공, 점선 = 요구'},
+   {src:'assets/lab-rspa-dashboard.png',cap:'fleet-console — 멀티로봇 fleet 대시보드, 레이어별 health와 배터리 (목업 브리지 데이터)'},
+   {src:'assets/lab-rspa-topics.png',cap:'fleet-console — 토픽·서비스 인스펙터, Foxglove WebSocket 라이브 구독 (목업 브리지 데이터)'},
+  ], links:[],
+  note:'세 저장소는 현재 private입니다. 화면은 목업 데이터로 채운 재현 캡처이며, 다이어그램은 저장소의 mermaid 산출물을 렌더한 것입니다.'},
+
  {id:'yeoui-amr', end:'2026.08', org:'버넥트 / 여의시스템 · 2026', title:'고중량 AI 서버 공정 AMR 자동화 시뮬레이션', period:'2026.07 – 2026.08', team:'시뮬레이션·검증 담당',
   skills:['Isaac Sim','PhysX','USD','Python','SimPy','A*','3D Factory Twin'], head:{t:'svg',k:'factoryAmr',cap:'공개용 개념 도식'},
   summary:'24~36kg급 AI 서버 제품의 조립·검사·에이징·포장·창고 흐름을 대상으로, AMR 기반 이송 자동화가 실제 장비 조합과 공간 제약 안에서 성립하는지 검증한 시뮬레이션/컨설팅 프로젝트입니다. CAD 기반 3D 공장 모델, DES 공정 시뮬레이션, Isaac Sim PhysX 국소 물리검증, 보고용 kinematic twin을 연결했습니다.',
@@ -1163,7 +1199,7 @@ function headInner(p,lazy,modal){
 function renderCards(scope){
   scope=scope||'all';
   var g=document.getElementById('projGrid');
-  var list=PROJECTS.filter(function(p){return scope==='all'||projectScope(p)===scope;});
+  var list=PROJECTS.filter(function(p){return scope==='all' ? !p.labOnly : projectScope(p)===scope;});
   if(!list.length){g.innerHTML=emptyProjectHTML(scope);return;}
   g.innerHTML=list.map(function(p){
     var i=PROJECTS.indexOf(p);
@@ -1217,8 +1253,9 @@ function openModal(i,fromHistory){
   var tags='<div class="mtags">'+p.skills.map(function(s){return '<span class="t">'+esc(s)+'</span>';}).join('')+'</div>';
   var sum='<div class="msum">'+esc(p.summary)+(p.note?'\n\n※ '+esc(p.note):'')+'</div>';
   var secs=p.sections.map(function(sec){return '<div class="msec"><h4>'+esc(sec.h)+'</h4><ul>'+sec.items.map(itemHTML).join('')+'</ul></div>';}).join('');
+  var gal=(p.media&&p.media.length)?'<div class="msec"><h4>화면 · 도식</h4><div class="mgal">'+p.media.map(function(g){return '<figure><img loading="lazy" src="'+esc(g.src)+'" alt="'+esc(g.cap||'')+'"><figcaption>'+esc(g.cap||'')+'</figcaption></figure>';}).join('')+'</div></div>':'';
   var links=(p.links&&p.links.length)?'<div class="mlinks">'+p.links.map(function(l){return '<a href="'+escUrl(l.u)+'" target="_blank" rel="noopener noreferrer">'+esc(l.l)+' &#8599;</a>';}).join('')+'</div>':'';
-  m.innerHTML=head+'<div class="mbody">'+meta+tags+sum+secs+links+'</div>';
+  m.innerHTML=head+'<div class="mbody">'+meta+tags+sum+secs+gal+links+'</div>';
   var back=document.getElementById('mback');
   back.setAttribute('aria-labelledby','mtitle');
   back.classList.add('open'); back.removeAttribute('aria-hidden'); document.body.classList.add('noscroll');
@@ -1264,6 +1301,18 @@ document.addEventListener('DOMContentLoaded',function(){
     if(e.key!=='Enter'&&e.key!==' ') return;
     if(e.target.closest('a')) return;
     var c=e.target.closest('.proj'); if(c){e.preventDefault();openModal(+c.dataset.i);}
+  });
+  /* Labs 카드 → 같은 모달 (data-mid = PROJECTS id) */
+  document.querySelectorAll('#labs .lab[data-mid]').forEach(function(el){
+    el.addEventListener('click',function(e){
+      if(e.target.closest('a')) return;
+      var i=indexOfId(el.dataset.mid); if(i>=0)openModal(i);
+    });
+    el.addEventListener('keydown',function(e){
+      if(e.key!=='Enter'&&e.key!==' ') return;
+      e.preventDefault();
+      var i=indexOfId(el.dataset.mid); if(i>=0)openModal(i);
+    });
   });
   var back=document.getElementById('mback');
   back.setAttribute('aria-hidden','true');
