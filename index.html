@@ -231,6 +231,9 @@ body.noscroll{overflow:hidden}
 /* ---- 개인 R&D / Private Labs ---- */
 .labintro{color:var(--ink-2);font-size:.95rem;margin:0 0 20px;max-width:76ch}
 .labintro b{color:var(--ink);font-weight:650}
+.labmore{color:var(--muted);font-size:.85rem;margin:16px 0 0;max-width:76ch}
+.labmore a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.labmore a:hover{color:var(--accent-ink);border-color:var(--accent)}
 .labs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media (max-width:900px){.labs{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){.labs{grid-template-columns:1fr}}
@@ -502,7 +505,7 @@ body.noscroll{overflow:hidden}
 
 <section id="projects">
   <div class="sec-head"><span class="idx">02</span><h2>대표 프로젝트</h2><span class="note">회사 / 외부 의뢰 · 최신순</span></div>
-  <p class="projlead">재직 중 수행한 고객·국가R&D·사내 제품화 작업과, 재직 경력 밖의 외부 의뢰를 분리해 볼 수 있도록 정리했습니다. 개인 R&D는 별도 섹션에서 private lab 형태로 다룹니다.</p>
+  <p class="projlead">재직 중 수행한 고객·국가R&D·사내 제품화 작업과, 재직 경력 밖의 외부 의뢰를 분리해 볼 수 있도록 정리했습니다. 개인 R&D는 아래 Labs 섹션에서 별도로 다룹니다.</p>
   <div class="projfilters" aria-label="프로젝트 분류">
     <button class="projfilter" type="button" data-scope="all" aria-pressed="true">전체</button>
     <button class="projfilter" type="button" data-scope="company" aria-pressed="false">회사</button>
@@ -552,7 +555,7 @@ body.noscroll{overflow:hidden}
     </article>
 
     <article class="axcard reveal">
-      <div class="kicker">Private Robot R&D</div>
+      <div class="kicker">Personal Robot R&D</div>
       <h3>RSPA System — 시뮬레이션·SLAM·운영 콘솔</h3>
       <p>개인 R&D로 자율주행 실험을 반복 가능하게 만들기 위해 ROS2 기반 시뮬레이션, SLAM 검증, 3DGS 기반 플릿 콘솔을 연결했습니다.</p>
       <div class="decision"><b>판단</b>개별 데모가 아니라 시뮬레이션 → 위치추정 → 운영 콘솔로 이어지는 개인 실험 루프를 우선 구축</div>
@@ -600,14 +603,14 @@ body.noscroll{overflow:hidden}
     <article class="lab reveal">
       <div class="labmedia"><img loading="lazy" src="assets/lab-fleet-viewer3d.gif" alt=""></div>
       <div class="labbody">
-        <div class="labmeta"><span class="labtag">Robot Ops Console</span><span class="labstate">Private</span></div>
-        <h3>RSPA System — 자율주행·시뮬·운영 통합</h3>
-        <p>개인적으로 구축 중인 로봇 R&D 시스템. 자율주행 스택을 조립하고, 시뮬레이션에서 검증한 뒤, 멀티로봇 운영 콘솔로 관제하는 실험 생태계.</p>
+        <div class="labmeta"><span class="labtag">Robot Ops Platform</span><span class="labstate">Private</span></div>
+        <h3>RSPA System — 한 플랫폼의 세 축</h3>
+        <p>개인 로봇 R&D 플랫폼을 코어·조립도구·관제콘솔 세 저장소로 나눠 구축. 자율주행 스택을 조립(stack-store)하고, 시뮬레이션·SLAM으로 검증(rspa)한 뒤, 멀티로봇 운영 콘솔(fleet-console)로 관제하는 구조로, 셋이 레지스트리 계약으로 맞물려 있습니다.</p>
         <dl>
-          <dt>구현</dt><dd>rspa · fleet-console · stack-store, ROS2, SLAM/Localization, 3DGS 뷰어 연동</dd>
-          <dt>증거</dt><dd>Foxglove WebSocket 프로토콜, 합성 4로봇 fleet 데모 GIF, private repo 작업 기록</dd>
+          <dt>구현</dt><dd>rspa(ROS2 스택·레지스트리→다이어그램 생성) · fleet-console(Foxglove WS + three.js/3DGS 관제) · stack-store(desired-state 스택 조립 UI)</dd>
+          <dt>증거</dt><dd>합성 4로봇 fleet 데모 GIF, 목업 브리지·API로 재현 가능한 스크린샷, private repo 작업 기록</dd>
         </dl>
-        <div class="lablinks"><span>Private repo</span><span>3D viewer GIF</span></div>
+        <div class="lablinks"><span>Private repos</span><span>3D viewer GIF</span></div>
       </div>
     </article>
 
@@ -619,9 +622,9 @@ body.noscroll{overflow:hidden}
         <p>로봇 연마 공정을 SDF와 Preston 모델로 근사해, 소재 제거량과 경로 품질을 검증하는 시뮬레이션.</p>
         <dl>
           <dt>구현</dt><dd>SDF 기반 소재 제거, 연마 경로/압력 모델, Unity 데모</dd>
-          <dt>상태</dt><dd>showcase 이미지 보유, 연마 과정 GIF 보강 후보</dd>
+          <dt>검증</dt><dd>pytest 113 · Rust 174 · Unity 스모크 13, 샘플 갤러리 22종(GIF 11 · plot 10)</dd>
         </dl>
-        <div class="lablinks"><span>Private repo</span><span>GIF 후보</span></div>
+        <div class="lablinks"><span>Private repo</span><span>Sample gallery</span></div>
       </div>
     </article>
 
@@ -633,7 +636,7 @@ body.noscroll{overflow:hidden}
         <p>창고 LiDAR 데이터와 3D Gaussian Splatting을 연결해 실내 공간 복원 가능성을 검증한 아카이브형 실험.</p>
         <dl>
           <dt>구현</dt><dd>LiDAR/이미지 기반 복원 파이프라인, 결과 비교 문서화</dd>
-          <dt>상태</dt><dd>중단 프로젝트로 범위와 한계를 명시해 공개 예정</dd>
+          <dt>상태</dt><dd>중단 지점과 한계를 명시한 아카이브로 정리</dd>
         </dl>
         <div class="lablinks"><span>Private repo</span><span>Archive</span></div>
       </div>
@@ -680,6 +683,7 @@ body.noscroll{overflow:hidden}
       </div>
     </article>
   </div>
+  <p class="labmore">그 외 — <b>snap-fit</b> SDF 포인트클라우드 정합, Rust + iOS FFI (진행 중) · <b>neuro-forge</b> Rust 로봇 시뮬 엔진 프로토타입 (중단 — 이후 렌더·센서 중심으로 방향을 재설계)</p>
 </section>
 
 <section id="career">
@@ -1129,7 +1133,7 @@ function scopeLabel(p){
 }
 function emptyProjectHTML(scope){
   var msg=scope==='personal'
-    ? '<b>개인 R&D 프로젝트는 정리 중입니다.</b><br>Private 저장소 중심이라 GitHub 링크 대신 문제 배경, 구조 도식, 핵심 구현, 결과를 짧은 케이스 스터디로 보여줄 예정입니다.'
+    ? '<b>개인 R&D 프로젝트는 아래 Labs 섹션에 있습니다.</b><br>Private 저장소 중심이라 GitHub 링크 대신 문제 배경, 구조 도식, 핵심 구현, 결과를 케이스 스터디 형태로 정리했습니다.'
     : '<b>해당 분류의 프로젝트가 아직 없습니다.</b>';
   return '<div class="projempty">'+msg+'</div>';
 }
