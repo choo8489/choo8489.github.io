@@ -592,7 +592,7 @@ body.noscroll{overflow:hidden}
   <div class="sec-head"><span class="idx">04</span><h2>개인 R&D / Private Labs</h2><span class="note">Private repo 중심 · GIF / 도식 / 결과로 요약</span></div>
   <p class="labintro">개인 저장소는 대부분 private이라 링크보다 <b>문제 배경, 구현 구조, 검증 흔적</b> 중심으로 정리했습니다. 회사 프로젝트와 별도로, 관심 도메인을 직접 파고들며 만든 실험·도구·프로토타입입니다.</p>
   <div class="labs">
-    <article class="lab reveal">
+    <article class="lab reveal" data-mid="sensus" tabindex="0" role="button" aria-label="Sensus 상세 보기">
       <div class="labmedia contain"><img loading="lazy" src="assets/lab-sensus-oct.png" alt=""></div>
       <div class="labbody">
         <div class="labmeta"><span class="labtag">Robotics Simulation</span><span class="labstate">Private</span></div>
@@ -602,7 +602,7 @@ body.noscroll{overflow:hidden}
           <dt>구현</dt><dd>렌더/센서 코어, 46종 센서, 라벨 데이터셋 생성</dd>
           <dt>증거</dt><dd>Python 264 + Rust 121 테스트, 센서 갤러리 이미지</dd>
         </dl>
-        <div class="lablinks"><span>Private repo</span><span>Sensor gallery</span></div>
+        <div class="lablinks"><span>Private repo</span><span class="labopen">센서 갤러리 자세히 &#43;</span></div>
       </div>
     </article>
 
@@ -620,7 +620,7 @@ body.noscroll{overflow:hidden}
       </div>
     </article>
 
-    <article class="lab reveal">
+    <article class="lab reveal" data-mid="robopolishsim" tabindex="0" role="button" aria-label="RoboPolishSim 상세 보기">
       <div class="labmedia contain"><img loading="lazy" src="assets/lab-robopolishsim.gif" alt=""></div>
       <div class="labbody">
         <div class="labmeta"><span class="labtag">Robot Surface Simulation</span><span class="labstate">Private</span></div>
@@ -630,11 +630,11 @@ body.noscroll{overflow:hidden}
           <dt>구현</dt><dd>SDF 기반 소재 제거, 연마 경로/압력 모델, Unity 데모</dd>
           <dt>검증</dt><dd>pytest 113 · Rust 174 · Unity 스모크 13, 샘플 갤러리 22종(GIF 11 · plot 10)</dd>
         </dl>
-        <div class="lablinks"><span>Private repo</span><span>Sample gallery</span></div>
+        <div class="lablinks"><span>Private repo</span><span class="labopen">샘플 갤러리 자세히 &#43;</span></div>
       </div>
     </article>
 
-    <article class="lab reveal">
+    <article class="lab reveal" data-mid="lcc-3dgs" tabindex="0" role="button" aria-label="lcc-3dgs 상세 보기">
       <div class="labmedia"><img loading="lazy" src="assets/lab-lcc-3dgs.gif" alt=""></div>
       <div class="labbody">
         <div class="labmeta"><span class="labtag">3D Reconstruction</span><span class="labstate">Private · Archived</span></div>
@@ -644,11 +644,11 @@ body.noscroll{overflow:hidden}
           <dt>구현</dt><dd>LiDAR/이미지 기반 복원 파이프라인, 결과 비교 문서화</dd>
           <dt>상태</dt><dd>중단 지점과 한계를 명시한 아카이브로 정리</dd>
         </dl>
-        <div class="lablinks"><span>Private repo</span><span>Archive</span></div>
+        <div class="lablinks"><span>Private repo</span><span class="labopen">실험 결과 자세히 &#43;</span></div>
       </div>
     </article>
 
-    <article class="lab reveal">
+    <article class="lab reveal" data-mid="ai-dev-os" tabindex="0" role="button" aria-label="AI Dev OS 상세 보기">
       <div class="labmedia">
         <svg viewBox="0 0 640 360" role="img" aria-label="">
           <rect width="640" height="360" fill="currentColor" opacity=".06"/>
@@ -671,7 +671,7 @@ body.noscroll{overflow:hidden}
           <dt>구성</dt><dd>ELI · orchestrator · execution-engine · github-rag · mcp-farm</dd>
           <dt>초점</dt><dd>큐, 권한, 실패 복구, 비용 추적이 있는 실행 시스템</dd>
         </dl>
-        <div class="lablinks"><span>Private repos</span><span>Architecture</span></div>
+        <div class="lablinks"><span>Private repos</span><span class="labopen">구성 자세히 &#43;</span></div>
       </div>
     </article>
 
@@ -1011,6 +1011,104 @@ const PROJECTS = [
    {src:'assets/lab-rspa-topics.png',cap:'fleet-console — 토픽·서비스 인스펙터, Foxglove WebSocket 라이브 구독 (목업 브리지 데이터)'},
   ], links:[],
   note:'세 저장소는 현재 private입니다. 화면은 목업 데이터로 채운 재현 캡처이며, 다이어그램은 저장소의 mermaid 산출물을 렌더한 것입니다.'},
+
+ {id:'sensus', end:'', org:'개인 R&D', title:'Sensus — 로봇 시뮬레이션 스튜디오', period:'진행 중', team:'개인 프로젝트', scope:'personal', labOnly:true,
+  skills:['Rust · wgpu','egui','Python','OpenUSD','합성데이터 파이프라인','센서 시뮬레이션'],
+  head:{t:'bg',src:'assets/lab-sensus-oct.png',cap:'OCT 센서 시뮬레이션 — 간섭무늬 FFT로 전 깊이 A-scan'},
+  summary:'물리 엔진은 교체 가능하게 두고, 렌더·센서 충실도를 핵심 IP로 쌓는 로봇 시뮬레이션 스튜디오 — "로봇 시뮬계의 VS Code + 자체 렌더 코어".\n한 명령으로 물리 씬을 46종 센서의 라벨된 학습 데이터셋으로 굽는 합성데이터 파이프라인(M0)이 동작합니다. 물리 → 렌더 → 센서 → 데이터셋이 한 루프로 돌고, 전부 헤드리스 테스트로 검증됩니다.',
+  sections:[
+   {h:'구성', items:[
+    '렌더 2백엔드 — Prism(Rust/wgpu): USD 메시 PBR + IBL + 섀도우 + AOV / 분석 CPU(Python): 의존성 0 인프로세스 레이트레이스',
+    '스튜디오 IDE 셸(egui) — Scene/Inspector/뷰포트, 트랜스폼 기즈모, Undo/Redo, USD 편집 영속',
+    'OpenUSD 단일 진실(SSOT) — 물리는 physics_fn seam으로 외부 엔진(MuJoCo 등) 교체식',
+    '데이터셋 8포맷 — COCO · KITTI · PCD · Middlebury flow · 시맨틱 PNG 등']},
+   {h:'센서 충실도 — 핵심 차별화', items:[
+    '센서 46종이 실제 물리를 모델링 — 시각 AOV·관성·촉각·투과영상(뮤온·중성자·THz)·분광(라만·감마)·레이더·라이다·소나·뉴로모픽까지',
+    'RGB 열화 효과 19종(모션블러·롤링셔터·렌즈플레어·JPEG 등) + 깊이 측정모델 7종으로 sim-to-real 노이즈 재현',
+    'RL 벤치마크 환경 8군, 최적제어·SLAM·인지 파이프라인 툴킷 동봉']},
+   {h:'검증', items:[
+    'Python 264 + Rust 121 단위 테스트 — 전부 헤드리스 실행',
+    'USD 샘플 씬 25종, 센서 갤러리 데모 14종 — 아래 이미지가 그 실제 출력']},
+  ],
+  media:[
+   {src:'assets/lab-sensus-ultrasound.png',cap:'Ultrasound B-mode — delay-and-sum 빔포밍. speckle과 분해능↔침투 트레이드까지 모델링'},
+   {src:'assets/lab-sensus-terahertz.png',cap:'Terahertz — T-ray 투과영상. 은닉물 see-through, 분자 흡수 지문'},
+   {src:'assets/lab-sensus-raman.png',cap:'Raman 분광 — 비탄성 산란 분자 지문, 형광 baseline 제거'},
+   {src:'assets/lab-sensus-electrosense.png',cap:'Electrosense — 수중 능동 전기수용. 전기이미지 너비로 거리 추정'},
+   {src:'assets/lab-sensus-skycompass.png',cap:'SkyCompass — 편광 하늘나침반, 곤충식 천체항법 (180° 모호 포함)'},
+  ], links:[],
+  note:'저장소는 private, 개발 진행 중(M0)입니다. 이미지는 센서 시뮬레이션이 실제로 생성한 관측입니다.'},
+
+ {id:'robopolishsim', end:'', org:'개인 R&D', title:'RoboPolishSim — 실제 소재 제거 로봇 폴리싱 시뮬레이터', period:'연구 프로토타입', team:'개인 프로젝트', scope:'personal', labOnly:true,
+  skills:['Python','Rust','SDF','Preston 마모 법칙','Newton · MuJoCo','Unity 네이티브 플러그인','PPO · DAgger'],
+  head:{t:'bg',src:'assets/lab-robopolishsim.gif',cap:'나선형 툴패스 그라인딩 — 접촉마다 소재가 실제로 깎인다'},
+  summary:'게임엔진 물리(PhysX·MuJoCo 등)는 강체 솔버라 소재가 깎여 나가는 과정을 시뮬레이션하지 못합니다. RoboPolishSim은 SDF 볼륨 공작물 + Preston 마모 법칙을 별도 물리 레이어로 두고 로봇 동역학과 결합해, "연마하면 실제로 형상이 변하는" 루프를 구현합니다.\nPython 코어 + Rust 커널 → polish_sim.dll 네이티브 플러그인(Unity/Unreal)까지 이어지는 스택입니다.',
+  sections:[
+   {h:'구성', items:[
+    '공작물 — 균일 격자 SDF 볼륨. 깎인 형상은 marching-tetrahedra로 메시 추출',
+    '소재 제거 — 접촉점에서 Preston 법칙(Δz ∝ 압력×속도)으로 SDF를 실제로 깎고, 접촉 반력(F/T)도 반환',
+    '로봇 — Newton + MuJoCo 6-DOF 동역학 + DLS IK / 합성 센서 — 깊이 카메라 + 힘·토크',
+    '인식·제어 — ICP 정합, 목표 대비 편차, CAM 툴패스 재계획 / RL — PPO 교사 → 학생 증류(DAgger) → 도메인 랜덤화']},
+   {h:'결과', items:[
+    'Ø7×50mm 원기둥 → 반각 25° 원뿔: 원뿔 영역 평균 |편차| 0.116mm — 복셀 0.2mm의 1.7개 수준',
+    '연삭↔검사 반복 수렴: 평균 |편차| 1.71 → 0.107mm (16배)',
+    'Preston 캘리브레이션: 측정 부피와 예측 부피가 4자리 수에 걸쳐 일치']},
+   {h:'검증', items:[
+    'pytest 113 · Rust 174 · Unity SmokeTest 13 — 신규 클론 기준으로 확인',
+    '샘플 22종 전부 갤러리화(GIF 11 · plot 10) — --gif/--plot 플래그로 바이트 단위 재현']},
+  ],
+  media:[
+   {src:'assets/lab-rps-pencil-tip.gif',cap:'원기둥 → 원뿔 나선 연삭. 색은 목표까지 남은 거리 — 수렴할수록 어두워진다'},
+   {src:'assets/lab-rps-helical-grind.gif',cap:'UR10e IK가 나선 툴패스를 실행 — 접촉점마다 SDF에서 소재 제거'},
+   {src:'assets/lab-rps-inspection.gif',cap:'연삭↔검사 반복 — 평균 |편차| 1.71 → 0.107mm (16배)'},
+   {src:'assets/lab-rps-deviation.png',cap:'목표 대비 편차 히트맵 — 격자무늬가 나선 패스 간 스캘럽, 실제 연마의 잔여 산과 같은 현상'},
+   {src:'assets/lab-rps-preston.png',cap:'Preston 캘리브레이션 — 측정=예측이 4자리 수에 걸쳐 일치. 벗어나는 유일한 점은 float32 노이즈 플로어 아래'},
+  ], links:[],
+  note:'저장소는 private입니다. 모든 GIF·수치는 저장소의 샘플 스크립트로 재현됩니다.'},
+
+ {id:'lcc-3dgs', end:'', org:'개인 R&D', title:'lcc-3dgs — LiDAR 초기화가 3DGS를 어디까지 살리나', period:'아카이브 (2026-07 중단)', team:'개인 프로젝트', scope:'personal', labOnly:true,
+  skills:['3D Gaussian Splatting','LiDAR','COLMAP','ETH3D','깊이 정규화','Difix3D+'],
+  head:{t:'bg',src:'assets/lab-lcc-3dgs.gif',cap:'왼쪽 표준 3DGS vs 오른쪽 LiDAR 초기화 — 학습에 안 쓴 시점'},
+  summary:'질문은 하나 — LiDAR를 3DGS의 초기화와 감독에 쓰면, 사진만 쓰는 표준 3DGS보다 나아지는가?\n무늬 없는 창고·복도는 SfM 특징점이 안 잡혀 3DGS가 안개처럼 무너지는 환경입니다. 원래 현장(창고 복도 ~34m) 촬영분은 고객사 자산이라 공개할 수 없어, 같은 주장을 공개 데이터(ETH3D delivery_area + Faro 레이저 스캔)로 측정했습니다.',
+  sections:[
+   {h:'측정 결과 — 같은 트레이너, 같은 카메라 경로', items:[
+    '초기 포인트: COLMAP sparse 3.2만 → 레이저 스캔 322만 (100배)',
+    '최대 VRAM 32.2 → 6.7GB (4.8배 적음) · 학습 30k iter 47분 → 36분',
+    'L1(학습 뷰) 0.048 → 0.024 (2배) — 자유 시점에서는 격차가 더 크다. 표준 3DGS는 새 시점에서 안개로 무너진다',
+    '단 SH 차수·densify 설정 차이도 섞여 있어, 개선분 전부가 LiDAR 덕은 아니라고 문서에 명시']},
+   {h:'알아낸 것', items:[
+    '레이저 스캔의 사각지대 + 대칭 깊이 손실 = 스캐너가 못 본 가림물(기둥)을 학습이 능동적으로 지운다 → 레이저면 뒤쪽만 벌주는 one-sided 깊이 손실로 해결',
+    'SH 3차는 뷰 44장에서 과적합 — 무지개 얼룩과 번짐. 1차로 낮춰 해소',
+    '디퓨전 복원(Difix3D+·GSFixer)은 2D 프레임은 좋아지지만 3D로 안 녹아든다 — 주력에서 제외하고 과정을 기록']},
+  ],
+  media:[
+   {src:'assets/lab-lcc-hero.jpg',cap:'학습 카메라 위치에서 실제 사진 vs 3DGS 렌더'},
+   {src:'assets/lab-lcc-blindspot.jpg',cap:'레이저 스캔의 사각지대 — 스캐너 바로 옆 기둥이 스캔에서 통째로 비어 있다. 대칭 깊이 손실과 만나면 학습이 기둥을 지운다'},
+   {src:'assets/lab-lcc-ablation.jpg',cap:'개선 과정 어블레이션 — v1(결손+얼룩) → v2(SH 1차) → v3(one-sided 깊이 손실, 기둥 완전 복원)'},
+   {src:'assets/lab-lcc-difix.jpg',cap:'Difix3D+ 실험 — 3DGS 렌더 / difix 출력 / 참조 사진. 2D는 좋아지나 3D 증류가 안 돼 주력에서 제외'},
+  ], links:[],
+  note:'저장소는 현재 private입니다. 원 촬영분은 고객사 자산이라, 공개 벤치마크(ETH3D)로 재측정한 결과만 담았습니다.'},
+
+ {id:'ai-dev-os', end:'', org:'개인 R&D', title:'AI Dev OS — 에이전트 실행 플랫폼', period:'진행 중', team:'개인 프로젝트', scope:'personal', labOnly:true,
+  skills:['TypeScript','Python · FastAPI','Slack Bolt','Claude CLI','MCP','tree-sitter','ChromaDB'],
+  head:{t:'bg',src:'assets/lab-aidevos-arch.png',cap:'구성 도식'},
+  summary:'자연어 요청을 계획으로 분해하고, 코드 생성·빌드·테스트·RAG·MCP 도구 실행까지 연결한 개인 자동화 플랫폼입니다. 다섯 저장소가 역할을 나눕니다.\n단순 챗봇이 아니라 큐, 권한, 실패 복구, 비용 추적을 갖춘 실행 시스템으로 설계했습니다.',
+  sections:[
+   {h:'구성 — 다섯 저장소', items:[
+    'ELI (허브) — Slack 기반 AI 파트너 멀티 런타임. 팀원마다 전용 파트너를 할당하고, 우선순위 큐(user > scheduled > idle)로 메시지·스케줄·자율 행동을 순차 처리',
+    'orchestrator — 자연어를 Plan-and-Execute로 분해해 Blender·Git·Shell 등 도구를 실행 (FastAPI + SSE 이벤트 버스)',
+    'execution-engine — 이슈 → 코드 생성 → 빌드 → 테스트 → 리포트 TaskGraph DAG. 실패 시 자동 수정 재시도, 동시성 제어, 중단 task 복구, 비용 추적',
+    'github-rag — tree-sitter 청킹 + ChromaDB 벡터 + Knowledge Graph로 레포를 시맨틱 검색하고 LLM 질의응답',
+    'mcp-farm — Blender·FreeCAD·GIMP·Penpot·Godot 등 창작 도구 MCP 서버를 수명 관리·중계하는 허브']},
+   {h:'자율·자기개선 (ELI)', items:[
+    'Idle Loop — 근무시간 30분 주기 자율 행동, 자정 self-improve, 매일 23시 회고',
+    '경험 축적 — 도구 사용 통계(experience bank)와 작업 교훈 추출(reflexion)',
+    '프롬프트 자동 튜닝과 자기 코드 수정 PR — 승인 워크플로를 거쳐 반영']},
+  ],
+  media:[
+   {src:'assets/lab-aidevos-arch.png',cap:'다섯 저장소의 연결 — 각 저장소 README의 아키텍처를 합쳐 그린 도식'},
+  ], links:[],
+  note:'다섯 저장소 모두 private입니다.'},
 
  {id:'yeoui-amr', end:'2026.08', org:'버넥트 / 여의시스템 · 2026', title:'고중량 AI 서버 공정 AMR 자동화 시뮬레이션', period:'2026.07 – 2026.08', team:'시뮬레이션·검증 담당',
   skills:['Isaac Sim','PhysX','USD','Python','SimPy','A*','3D Factory Twin'], head:{t:'svg',k:'factoryAmr',cap:'공개용 개념 도식'},
